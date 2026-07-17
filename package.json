@@ -1,0 +1,12 @@
+{
+  "name": "wendoo-ngo-maintenance",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Temporary maintenance page for Wendoo School Breakfast Empowerment Initiative.",
+  "scripts": {
+    "test": "node tests/validate.mjs"
+  },
+  "engines": {
+    "node": ">=22 <23"
+  }
+}

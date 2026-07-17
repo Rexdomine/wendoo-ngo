@@ -1,0 +1,7 @@
+.vercel
+node_modules
+stitch-source
+qa
+scripts
+.DS_Store
+*.log
