@@ -4,7 +4,8 @@
   "private": true,
   "description": "Temporary maintenance page for Wendoo School Breakfast Empowerment Initiative.",
   "scripts": {
-    "test": "node tests/validate.mjs"
+    "test": "node tests/validate.mjs",
+    "test:browser": "node tests/browser-qa.mjs"
   },
   "engines": {
     "node": ">=22 <23"
