@@ -1,142 +1,155 @@
 import { chromium } from 'playwright';
 import { spawn } from 'child_process';
-import { setTimeout } from 'timers/promises';
+import { setTimeout as delay } from 'timers/promises';
 import assert from 'node:assert/strict';
 
-const PORT = 9876 + Math.floor(Math.random() * 500);
-const BASE = 'http://localhost:'+PORT;
+const PORT = 9876 + Math.floor(Math.random() * 900);
+const BASE = `http://127.0.0.1:${PORT}`;
+const viewports = [
+  { name: 'mobile', width: 390, height: 844 },
+  { name: 'tablet', width: 768, height: 1024 },
+  { name: 'laptop', width: 1366, height: 768 },
+  { name: 'desktop', width: 1440, height: 900 },
+];
+const storyAssets = ['story-morning.webp', 'story-service.webp', 'story-eating.webp', 'story-learning.webp'];
+const majorSections = ['hero', 'problem', 'story', 'programme', 'impact', 'partner', 'stories', 'cta'];
 
 let server;
 let browser;
-let exitCode = 0;
+
+function channel(value) {
+  const match = String(value).match(/[\d.]+/g);
+  return match ? match.slice(0, 3).map(Number) : [0, 0, 0];
+}
+
+function luminance(rgb) {
+  const values = rgb.map(value => {
+    const normalized = value / 255;
+    return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * values[0] + 0.7152 * values[1] + 0.0722 * values[2];
+}
+
+function contrast(foreground, background) {
+  const lighter = Math.max(luminance(channel(foreground)), luminance(channel(background)));
+  const darker = Math.min(luminance(channel(foreground)), luminance(channel(background)));
+  return (lighter + 0.05) / (darker + 0.05);
+}
 
 async function run() {
-  server = spawn('python3', ['-m','http.server', String(PORT)], { cwd: '.', stdio: 'pipe' });
-  server.stdout.on('data', d => { if (d.toString().includes('Serving')) console.log('Server:', d.toString().trim()); });
-  server.stderr.on('data', d => console.error('Server err:', d.toString().trim()));
-  await setTimeout(800);
+  server = spawn('python3', ['-m', 'http.server', String(PORT), '--bind', '127.0.0.1'], { cwd: '.', stdio: 'pipe' });
+  await delay(800);
+  browser = await chromium.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox'] });
 
-  // Try launch; if missing executable, report exactly and exit
-  try {
-    browser = await chromium.launch({ headless: true, args: ['--no-sandbox','--disable-setuid-sandbox'] });
-  } catch (e) {
-    const msg = (e && e.message ? e.message : String(e)).toLowerCase();
-    if (msg.includes('executable') || msg.includes('browser') || msg.includes('chromium') || msg.includes('launch')) {
-      console.error('BROWSER EXECUTABLE MISSING');
-      console.error('Playwright Chromium binary not found. Install with: npx playwright install chromium');
-      process.exitCode = 1;
-      return;
-    }
-    throw e;
-  }
-
-  const viewports = [
-    { name: 'mobile', w: 390, h: 844 },
-    { name: 'tablet', w: 768, h: 1024 },
-    { name: 'laptop', w: 1366, h: 768 },
-    { name: 'desktop', w: 1440, h: 900 },
-  ];
-
-  for (const vp of viewports) {
-    const page = await browser.newPage({ viewport: { width: vp.w, height: vp.h } });
+  for (const viewport of viewports) {
+    const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height } });
+    const page = await context.newPage();
     const applicationErrors = [];
-    page.on('console', msg => { if (msg.type() === 'error' && !msg.text().includes('youtube')) applicationErrors.push('console: '+msg.text()); });
-    page.on('pageerror', err => applicationErrors.push('page: '+err.message));
-    const res = await page.goto(BASE + '/index.html', { waitUntil: 'load', timeout: 15000 });
-    assert.strictEqual(res.status(), 200, 'RED: HTTP status at '+vp.name);
-    const h1 = await page.locator('h1').count();
-    assert.strictEqual(h1, 1, 'RED: h1 count at '+vp.name);
-    // No document overflow (horizontal scroll)
-    const scrollW = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
-    assert.ok(scrollW <= 2, 'RED: overflow at '+vp.name + ' scrollW='+scrollW);
-    // Local images decoded after exercising native lazy-loading.
-    const images = page.locator('img');
-    for (let i = 0; i < await images.count(); i += 1) {
-      await images.nth(i).scrollIntoViewIfNeeded();
-    }
-    await page.waitForFunction(() => Array.from(document.images).every(i => i.complete), null, { timeout: 5000 });
-    const broken = await page.evaluate(() => Array.from(document.images).filter(i => i.naturalWidth === 0).map(i => i.getAttribute('src')));
-    assert.deepStrictEqual(broken, [], 'RED: broken images at '+vp.name+': '+broken.join(', '));
-    // No app / maintenance copy
-    const bodyText = await page.textContent('body');
-    assert.ok(!bodyText.includes('Website refresh in progress'), 'RED: maintenance copy at '+vp.name);
-
-    // Custom editorial surfaces must retain intended contrast over generic section rhythm.
-    const responseSurface = await page.locator('#response').evaluate(e => getComputedStyle(e).backgroundImage);
-    const responseText = await page.locator('#response p').first().evaluate(e => getComputedStyle(e).color);
-    const corporateButton = await page.locator('#corporate .btn--secondary').evaluate(e => {
-      const s = getComputedStyle(e); return { color: s.color, background: s.backgroundColor };
+    page.on('console', message => {
+      if (message.type() === 'error' && !message.text().toLowerCase().includes('youtube')) applicationErrors.push(`console: ${message.text()}`);
     });
-    assert.ok(responseSurface.includes('gradient'), 'RED: response dark surface overridden at '+vp.name);
-    assert.strictEqual(responseText, 'rgb(230, 242, 243)', 'RED: response text contrast at '+vp.name);
-    assert.notStrictEqual(corporateButton.color, corporateButton.background, 'RED: corporate CTA text invisible at '+vp.name);
+    page.on('pageerror', error => applicationErrors.push(`page: ${error.message}`));
 
-    // Navigation checks
-    const toggleHidden = await page.locator('.nav-toggle').evaluate(e => e.offsetParent === null);
-    if (vp.name === 'mobile' || vp.name === 'tablet') {
-      // At mobile/tablet, toggle visible; nav hidden initially
-      assert.strictEqual(await page.locator('.nav-toggle').count(), 1, 'RED: toggle missing mobile');
-      // Open via click
-      await page.click('.nav-toggle');
-      await page.waitForSelector('#primary-nav.open', { timeout: 2000 });
-      // Escape closes
-      await page.keyboard.press('Escape');
-      await page.waitForSelector('#primary-nav.open', { state: 'hidden', timeout: 2000 });
-    } else {
-      // Desktop: nav visible, toggle hidden
-      assert.strictEqual(await page.locator('.primary-nav').evaluate(e => window.getComputedStyle(e).display !== 'none'), true, 'RED: desktop nav hidden');
-      assert.strictEqual(toggleHidden, true, 'RED: toggle visible on desktop');
+    const response = await page.goto(`${BASE}/index.html`, { waitUntil: 'load', timeout: 15000 });
+    assert.equal(response.status(), 200, `HTTP status at ${viewport.name}`);
+    assert.equal(await page.locator('h1').count(), 1, `one h1 at ${viewport.name}`);
+    assert.ok((await page.locator('h1').textContent()).includes('No child should have to learn'), `mission h1 at ${viewport.name}`);
+
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+    assert.ok(overflow <= 2, `horizontal overflow at ${viewport.name}: ${overflow}px`);
+
+    const images = page.locator('img');
+    for (let index = 0; index < await images.count(); index += 1) await images.nth(index).scrollIntoViewIfNeeded();
+    await page.waitForFunction(() => Array.from(document.images).every(image => image.complete), null, { timeout: 7000 });
+    const broken = await page.evaluate(() => Array.from(document.images).filter(image => image.naturalWidth === 0).map(image => image.getAttribute('src')));
+    assert.deepEqual(broken, [], `broken images at ${viewport.name}`);
+
+    for (const asset of storyAssets) {
+      assert.equal(await page.locator(`img[src="/assets/${asset}"]`).count(), 1, `${asset} appears once at ${viewport.name}`);
+    }
+    for (const id of majorSections) {
+      const box = await page.locator(`#${id}`).boundingBox();
+      assert.ok(box && box.width > 20 && box.height > 20, `${id} has geometry at ${viewport.name}`);
     }
 
-    // Donation dialog
-    const donateBtn = page.locator('[data-action="open-donate"]').first();
-    await donateBtn.click();
-    await page.waitForSelector('#donate-dialog[open]', { timeout: 2000 });
-    // Focus inside
-    const active = await page.evaluate(() => document.activeElement?.tagName || '');
-    assert.ok(active === 'BUTTON' || active === 'A', 'RED: dialog focus');
-    // Close via Escape
-    await page.keyboard.press('Escape');
-    await page.waitForSelector('#donate-dialog', { state: 'hidden', timeout: 2000 });
-    // Focus returns to exact opener
-    const focusedTag = await page.evaluate(() => document.activeElement?.getAttribute('data-action') || document.activeElement?.id || '');
-    assert.strictEqual(focusedTag, 'open-donate', 'RED: donation focus restore');
-    // Close via button
-    await donateBtn.click();
-    await page.waitForSelector('#donate-dialog[open]', { timeout: 2000 });
-    await page.locator('#donate-dialog button[type="submit"]').first().click();
-    await page.waitForSelector('#donate-dialog', { state: 'hidden', timeout: 2000 });
+    await page.locator('#problem').evaluate(element => {
+      document.documentElement.style.scrollBehavior = 'auto';
+      element.scrollIntoView({ block: 'start', behavior: 'auto' });
+    });
+    await page.waitForTimeout(50);
+    const anchorGeometry = await page.evaluate(() => ({
+      top: document.getElementById('problem').getBoundingClientRect().top,
+      header: document.querySelector('.site-header').getBoundingClientRect().height,
+    }));
+    assert.ok(anchorGeometry.top >= anchorGeometry.header - 3, `sticky header does not cover #problem at ${viewport.name}: top=${anchorGeometry.top}, header=${anchorGeometry.header}`);
 
-    // Video: no initial iframe; click creates youtube-nocookie iframe; abort external request after src assertion
-    const iframeBefore = await page.locator('#video-frame iframe').count();
-    assert.strictEqual(iframeBefore, 0, 'RED: initial iframe present');
+    const primaryButton = await page.locator('.btn--primary').first().evaluate(element => {
+      const style = getComputedStyle(element);
+      return { color: style.color, background: style.backgroundColor };
+    });
+    assert.ok(contrast(primaryButton.color, primaryButton.background) >= 4.5, `primary CTA contrast at ${viewport.name}`);
+    const impactHeading = await page.locator('.impact-head h2').evaluate(element => {
+      const text = getComputedStyle(element).color;
+      const background = getComputedStyle(element.parentElement).backgroundColor;
+      return { text, background };
+    });
+    assert.ok(contrast(impactHeading.text, impactHeading.background) >= 4.5, `impact heading contrast at ${viewport.name}`);
+
+    const isCompact = viewport.width <= 768;
+    const toggleHidden = await page.locator('.nav-toggle').evaluate(element => element.offsetParent === null);
+    if (isCompact) {
+      assert.equal(toggleHidden, false, `navigation toggle visible at ${viewport.name}`);
+      await page.click('.nav-toggle');
+      await page.waitForSelector('#primary-nav.open');
+      await page.keyboard.press('Escape');
+      await page.waitForSelector('#primary-nav.open', { state: 'hidden' });
+    } else {
+      assert.equal(toggleHidden, true, `navigation toggle hidden at ${viewport.name}`);
+      assert.equal(await page.locator('.primary-nav').evaluate(element => getComputedStyle(element).display !== 'none'), true, `desktop nav visible at ${viewport.name}`);
+    }
+
+    const donate = page.locator('[data-action="open-donate"]').first();
+    await donate.click();
+    await page.waitForSelector('#donate-dialog[open]');
+    assert.ok(await page.locator('#donate-dialog').evaluate(dialog => dialog.contains(document.activeElement)), `dialog receives focus at ${viewport.name}`);
+    await page.keyboard.press('Escape');
+    await page.waitForSelector('#donate-dialog', { state: 'hidden' });
+    assert.equal(await donate.evaluate(element => element === document.activeElement), true, `dialog restores focus at ${viewport.name}`);
+
+    assert.equal(await page.locator('#video-frame iframe').count(), 0, `poster-first video at ${viewport.name}`);
     await page.route('https://www.youtube-nocookie.com/**', route => route.abort());
     await page.click('[data-action="load-video"]');
-    await page.waitForSelector('#video-frame iframe', { timeout: 3000 });
-    const src = await page.locator('#video-frame iframe').getAttribute('src');
-    assert.ok(src.includes('youtube-nocookie.com'), 'RED: video source not nocookie');
-    assert.ok(src.includes('l-pzjlSyjA0'), 'RED: video ID missing');
-    assert.ok(src.includes('autoplay=1') && src.includes('mute=1'), 'RED: video params missing');
-    assert.deepStrictEqual(applicationErrors, [], 'RED: application errors at '+vp.name+': '+applicationErrors.join(' | '));
-    await page.close();
+    await page.waitForSelector('#video-frame iframe');
+    const videoSource = await page.locator('#video-frame iframe').getAttribute('src');
+    assert.ok(videoSource.includes('youtube-nocookie.com/embed/l-pzjlSyjA0'), `privacy video source at ${viewport.name}`);
+    assert.ok(videoSource.includes('autoplay=1') && videoSource.includes('mute=1'), `muted click-to-play params at ${viewport.name}`);
+
+    assert.deepEqual(applicationErrors, [], `application errors at ${viewport.name}: ${applicationErrors.join(' | ')}`);
+    await context.close();
   }
 
-  // Reduced-motion: class present if preferred; computed animations disabled
-  // We simulate by setting preference via evaluate (not persistent), just verify CSS contract
-  const page = await browser.newPage({ viewport: { width: 1366, height: 768 } });
-  await page.goto(BASE + '/index.html', { waitUntil: 'load' });
-  await page.evaluate(() => document.documentElement.classList.add('reduced-motion'));
-  const hasClass = await page.evaluate(() => document.documentElement.classList.contains('reduced-motion'));
-  assert.strictEqual(hasClass, true, 'RED: reduced-motion class');
-  await page.close();
+  const reducedContext = await browser.newContext({ viewport: { width: 1366, height: 768 }, reducedMotion: 'reduce' });
+  const reducedPage = await reducedContext.newPage();
+  await reducedPage.goto(`${BASE}/index.html`, { waitUntil: 'load' });
+  assert.equal(await reducedPage.locator('html').evaluate(element => element.classList.contains('reduced-motion')), true, 'real reduced-motion preference is detected');
+  const reducedStyles = await reducedPage.locator('[data-reveal]').evaluateAll(elements => elements.map(element => ({ opacity: getComputedStyle(element).opacity, transform: getComputedStyle(element).transform })));
+  assert.ok(reducedStyles.every(style => style.opacity === '1' && style.transform === 'none'), 'reduced motion disables reveal displacement');
+  await reducedContext.close();
+
+  const noScriptContext = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto(`${BASE}/index.html`, { waitUntil: 'load' });
+  const noScriptStyles = await noScriptPage.locator('[data-reveal]').evaluateAll(elements => elements.map(element => ({ opacity: getComputedStyle(element).opacity, transform: getComputedStyle(element).transform, display: getComputedStyle(element).display })));
+  assert.ok(noScriptStyles.length > 0, 'no-JS reveal elements present');
+  assert.ok(noScriptStyles.every(style => style.opacity === '1' && style.transform === 'none' && style.display !== 'none'), 'no-JS content is fully visible');
+  await noScriptContext.close();
 
   console.log('Browser QA GREEN');
 }
 
 run()
-  .catch(e => { console.error('QA ERROR:', e.message || e); process.exitCode = 1; })
+  .catch(error => { console.error('QA ERROR:', error.message || error); process.exitCode = 1; })
   .finally(async () => {
     if (browser) await browser.close().catch(() => {});
     if (server) server.kill();
-    process.exit(process.exitCode || 0);
   });

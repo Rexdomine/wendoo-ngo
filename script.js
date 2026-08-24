@@ -1,12 +1,40 @@
-/** Accessible progressive enhancement — addEventListener only */
+/** Accessible progressive enhancement — addEventListener only; no inline onclick. */
 (function () {
   'use strict';
 
+  // Mark JS enabled
   document.documentElement.classList.add('js');
 
-  // Reduced motion
+  // Reduced motion hook
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('reduced-motion');
+  }
+  window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', function (e) {
+    if (e.matches) document.documentElement.classList.add('reduced-motion');
+    else document.documentElement.classList.remove('reduced-motion');
+  });
+
+  // Progressive reveal via IntersectionObserver (fail-open: content fully visible without JS)
+  try {
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ready');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    if (revealEls.length) {
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+      document.documentElement.classList.add('reveal-ready');
+    } else {
+      document.documentElement.classList.add('reveal-ready');
+    }
+  } catch (e) {
+    // Observer construction failure: remain fully visible (fail-open)
+    document.documentElement.classList.add('reveal-ready');
   }
 
   // Mobile nav
@@ -22,7 +50,7 @@
     } else {
       primaryNav.hidden = false;
       primaryNav.classList.remove('open');
-      navToggle && navToggle.setAttribute('aria-expanded', 'false');
+      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
     }
   }
 
@@ -31,31 +59,30 @@
     navPreviousFocus = document.activeElement;
     primaryNav.hidden = false;
     primaryNav.classList.add('open');
-    navToggle && navToggle.setAttribute('aria-expanded', 'true');
-    // Focus first link
-    const first = primaryNav.querySelector('a');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+    var first = primaryNav.querySelector('a');
     if (first) setTimeout(function () { first.focus(); }, 10);
   }
+
   function closeNav() {
     if (!primaryNav) return;
     primaryNav.hidden = mobileNav.matches;
     primaryNav.classList.remove('open');
-    navToggle && navToggle.setAttribute('aria-expanded', 'false');
+    if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
     if (navPreviousFocus) { navPreviousFocus.focus(); navPreviousFocus = null; }
     else if (navToggle) navToggle.focus();
   }
+
   if (navToggle && primaryNav) {
     syncNav();
     mobileNav.addEventListener('change', syncNav);
     navToggle.addEventListener('click', function () {
-      const open = primaryNav.classList.contains('open');
+      var open = primaryNav.classList.contains('open');
       open ? closeNav() : openNav();
     });
-    // Anchor click closes nav
     primaryNav.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { closeNav(); });
     });
-    // Escape closes
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && primaryNav.classList.contains('open')) {
         e.preventDefault();
@@ -73,21 +100,18 @@
       if (!donateDialog) return;
       donateOpener = document.activeElement;
       donateDialog.showModal();
-      // Focus first focusable inside dialog
-      const focusable = donateDialog.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      var focusable = donateDialog.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
       if (focusable) setTimeout(function () { focusable.focus(); }, 10);
     });
   });
 
   if (donateDialog) {
-    // Backdrop click closes (click outside .dialog-panel)
     donateDialog.addEventListener('click', function (e) {
       if (!e.target.closest('.dialog-panel')) {
         donateDialog.close();
         if (donateOpener) { donateOpener.focus(); donateOpener = null; }
       }
     });
-    // Escape handled natively by dialog, but restore focus after close
     donateDialog.addEventListener('close', function () {
       if (donateOpener) { donateOpener.focus(); donateOpener = null; }
     });
@@ -96,15 +120,12 @@
   // Video poster-first click-to-play (privacy-enhanced, idempotent, no audible autoplay)
   document.querySelectorAll('[data-action="load-video"]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      const wrapper = document.getElementById('video-wrapper');
-      const frame = document.getElementById('video-frame');
+      var wrapper = document.getElementById('video-wrapper');
+      var frame = document.getElementById('video-frame');
       if (!frame) return;
-      // Idempotent
       if (frame.innerHTML.trim().length > 0) {
-        // Already loaded; focus iframe
-        const iframe = frame.querySelector('iframe');
+        var iframe = frame.querySelector('iframe');
         if (iframe) { iframe.focus(); }
-        // Hide poster button from focus
         if (btn) { btn.hidden = true; btn.setAttribute('tabindex', '-1'); btn.setAttribute('aria-hidden', 'true'); }
         return;
       }
@@ -114,7 +135,7 @@
         btn.setAttribute('aria-hidden', 'true');
       }
       frame.hidden = false;
-      const iframe = document.createElement('iframe');
+      var iframe = document.createElement('iframe');
       iframe.setAttribute('src', 'https://www.youtube-nocookie.com/embed/l-pzjlSyjA0?autoplay=1&mute=1&rel=0');
       iframe.setAttribute('title', 'Wendoo School Breakfast NGO Launch');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
@@ -125,7 +146,6 @@
       iframe.setAttribute('loading', 'lazy');
       frame.innerHTML = '';
       frame.appendChild(iframe);
-      // Focus iframe after insert
       setTimeout(function () { iframe.focus(); }, 50);
     });
   });
