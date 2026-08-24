@@ -1,63 +1,306 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f8faf8" />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta
-      name="description"
-      content="The Wendoo School Breakfast Empowerment Initiative website is currently being refreshed."
-    />
-    <title>Wendoo | Website refresh in progress</title>
-    <link rel="icon" href="/assets/wendoo-logo.jpg" type="image/jpeg" />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <div class="ambient ambient--teal" aria-hidden="true"></div>
-    <div class="ambient ambient--red" aria-hidden="true"></div>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0CACBA" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Wendoo School Breakfast Empowerment Initiative — working to remove hunger as a barrier to learning." />
+<title>Wendoo — No child should have to learn on an empty stomach</title>
+<link rel="icon" href="/assets/wendoo-logo.jpg" type="image/jpeg" />
+<link rel="canonical" href="https://wendoo-ngo.vercel.app/" />
+<link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
 
-    <div class="page-shell">
-      <header class="site-header" aria-label="Wendoo identity">
-        <img
-          class="brand-logo"
-          src="/assets/wendoo-logo.jpg"
-          width="738"
-          height="345"
-          alt="Wendoo — Wendoo School Breakfast Empowerment Initiative"
-        />
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <a href="/" class="brand" aria-label="Wendoo home">
+      <img src="/assets/wendoo-logo.jpg" alt="Wendoo — Wendoo School Breakfast Empowerment Initiative" width="120" height="56" loading="eager" />
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#problem">Our Purpose</a></li>
+        <li><a href="#story">The Journey</a></li>
+        <li><a href="#programme">Our Programme</a></li>
+        <li><a href="#impact">Our Impact</a></li>
+        <li><a href="#partner">Partner With Us</a></li>
+        <li><a href="#stories">Stories</a></li>
+        <li><a href="#cta" class="nav-donate">Donate</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content" role="main">
+
+  <!-- 1 HERO -->
+  <section class="hero" aria-label="Introduction" id="hero" data-reveal>
+    <div class="hero-inner">
+      <figure class="hero-media" aria-label="Conceptual illustration — fictional / illustrative">
+        <img src="/assets/story-morning.webp" alt="" width="1400" height="933" loading="eager" />
+        <figcaption class="concept-note">Illustrative scenes feature fictional people.</figcaption>
+      </figure>
+      <div class="hero-copy">
+        <h1>No child should have to learn on an empty stomach.</h1>
+        <p class="lede">Wendoo is working to remove hunger as a barrier to learning — by helping children start their school day nourished, ready and able to learn.</p>
+        <p class="brand-line">Putting breakfast on the table. Putting opportunity in children’s hands.</p>
+        <div class="cta-row">
+          <button type="button" class="btn btn--primary" id="btn-donate" data-action="open-donate">Donate Now</button>
+          <a href="#story" class="btn btn--outline">Begin the journey</a>
+        </div>
+        <p class="small">Wendoo School Breakfast Empowerment Initiative</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 PROBLEM -->
+  <section class="section problem" id="problem" aria-labelledby="problem-heading" data-reveal>
+    <div class="section-inner problem-grid">
+      <div class="problem-head">
+        <h2 id="problem-heading">Hunger doesn’t stop at the school gate.</h2>
+        <p class="statement">Wendoo exists to help change that.</p>
+      </div>
+      <div class="problem-body">
+        <p>A child can arrive at school ready to learn — but hunger can make learning harder.</p>
+        <p>For children in vulnerable circumstances, a nutritious breakfast is not always guaranteed. Going to school hungry can affect concentration, energy, participation and wellbeing.</p>
+        <p>When hunger becomes a barrier to learning, it can become a barrier to opportunity.</p>
+        <p>We believe every child deserves to begin the school day with the nourishment and support they need to learn, grow and thrive.</p>
+        <p>Through the Wendoo School Breakfast Empowerment Initiative, we work to expand access to nutritious breakfast support for children who need it most — and to build partnerships capable of sustainable, scalable solutions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 STORY -->
+  <section class="section story" id="story" aria-labelledby="story-heading" data-reveal>
+    <div class="section-inner">
+      <header class="section-header">
+        <h2 id="story-heading">From morning to classroom — a journey worth supporting.</h2>
       </header>
 
-      <main class="hero">
-        <div class="hero-copy">
-          <div class="status" role="status">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span>Website refresh in progress</span>
+      <div class="story-flow" aria-label="Story sequence: service, eating, readiness">
+        <!-- Beat 1: service (cinematic anchor, text overlap/split) -->
+        <article class="story-anchor" data-reveal aria-label="Breakfast service">
+          <figure class="media-bleed" aria-label="Illustrative: breakfast service">
+            <img src="/assets/story-service.webp" alt="" width="1400" height="933" loading="lazy" />
+            <!-- disclosure preserved once in hero only -->
+          </figure>
+          <div class="anchor-text">
+            <span class="overline">Step 01 — Breakfast service</span>
+            <h3>Prepared with care, served with respect.</h3>
+            <p>A warm, nutritious meal can become the first act of belonging in a child’s school day. The service is not only food — it is a message that they are seen.</p>
           </div>
+        </article>
 
-          <p class="eyebrow">We’re refreshing our digital home</p>
-          <h1>A brighter experience<br class="desktop-break" /> is on the way.</h1>
-          <p class="intro">
-            The Wendoo School Breakfast Empowerment Initiative website is currently being
-            refreshed. Please check back soon.
-          </p>
-        </div>
+        <!-- Beat 2: eating (offset composition) -->
+        <article class="story-offset" data-reveal aria-label="Eating together">
+          <figure class="media-bleed" aria-label="Illustrative: eating together">
+            <img src="/assets/story-eating.webp" alt="" width="1400" height="933" loading="lazy" />
+            <!-- disclosure preserved once in hero only -->
+          </figure>
+          <div class="offset-text">
+            <h3>Eating together</h3>
+            <p>Shared meals build friendships. They restore energy, belief and the simple comfort of being cared for — turning a routine into a community moment.</p>
+          </div>
+        </article>
 
-        <div class="community-mark" aria-hidden="true">
-          <span class="orbit orbit--outer"></span>
-          <span class="orbit orbit--inner"></span>
-          <span class="person person--top"></span>
-          <span class="person person--right"></span>
-          <span class="person person--bottom"></span>
-          <span class="person person--left"></span>
-          <span class="community-core"></span>
-        </div>
-      </main>
-
-      <footer class="site-footer">
-        <span class="footer-line" aria-hidden="true"></span>
-        <p>© 2026 Wendoo School Breakfast Empowerment Initiative</p>
-      </footer>
+        <article class="story-ready" data-reveal aria-label="Ready to learn">
+          <span class="overline">Step 03 — Ready to learn</span>
+          <h3>Nourishment changes how the school day can begin.</h3>
+          <p>With nourishment comes readiness — to listen, to participate, to imagine a future not limited by hunger. The morning sets the tone for everything that follows.</p>
+        </article>
+      </div>
     </div>
-  </body>
+  </section>
+
+  <!-- 4 PROGRAMME -->
+  <section class="section programme" id="programme" aria-labelledby="programme-heading" data-reveal>
+    <div class="section-inner">
+      <div class="programme-grid">
+        <div class="programme-copy">
+          <span class="overline">The programme</span>
+          <h2 id="programme-heading">The Wendoo School Breakfast Empowerment Initiative</h2>
+          <p>Our programme is designed to help children who may otherwise begin their school day without a nutritious meal.</p>
+          <p>We work towards building partnerships with schools, communities, businesses, foundations, philanthropists and other organisations to support breakfast provision and develop sustainable models for expansion.</p>
+        </div>
+        <div class="programme-approach">
+          <h3>Our approach</h3>
+          <ol class="numbered-steps" aria-label="Programme approach steps">
+            <li><strong>Identify</strong><span>Work with communities and relevant partners to identify need.</span></li>
+            <li><strong>Mobilise</strong><span>Bring together funding, resources, expertise and community support.</span></li>
+            <li><strong>Deliver</strong><span>Support nutritious breakfast provision for participating children.</span></li>
+            <li><strong>Measure</strong><span>Track reach, resources and outcomes.</span></li>
+            <li><strong>Grow</strong><span>Use learning and partnerships to expand the programme sustainably.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <figure class="video-block" aria-label="Programme in action">
+        <figcaption><strong>Programme in Action</strong> — “Wendoo School Breakfast NGO Launch” · Wendoo NGO</figcaption>
+        <div class="video-wrapper" id="video-wrapper" role="region" aria-label="Video player">
+          <button type="button" class="video-poster" id="btn-play-video" data-action="load-video" aria-label="Play video: Wendoo School Breakfast NGO Launch" aria-describedby="video-desc">
+            <img src="/assets/video-poster.webp" alt="Video poster: Wendoo School Breakfast NGO Launch" width="1280" height="720" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </button>
+          <p class="video-note" id="video-desc">Watch Wendoo’s programme in action. The video loads only when you press play.</p>
+          <div id="video-frame" hidden></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 5 IMPACT -->
+  <section class="section impact" id="impact" aria-labelledby="impact-heading" data-reveal>
+    <div class="section-inner impact-grid">
+      <div class="impact-head">
+        <h2 id="impact-heading">Our Impact</h2>
+        <p class="pending">Verified figures are being prepared.</p>
+      </div>
+      <div class="impact-body">
+        <p>We are committed to understanding and reporting the difference our work makes. As the programme grows, we will track and report on:</p>
+        <ul class="impact-cats" aria-label="Impact tracking categories">
+          <li>Children reached</li>
+          <li>Breakfasts provided</li>
+          <li>Schools supported</li>
+          <li>Communities reached</li>
+          <li>Partners engaged</li>
+          <li>Resources deployed</li>
+        </ul>
+        <p>Our goal is not simply to provide support. It is to understand what works, learn from experience, and build programmes capable of lasting impact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 PARTNER -->
+  <section class="section partner" id="partner" aria-labelledby="partner-heading" data-reveal>
+    <div class="section-inner partner-split">
+      <div class="partner-dark">
+        <h2 id="partner-heading">Partner With Wendoo</h2>
+        <p>Wendoo welcomes organisations and individuals who want to help tackle hunger as a barrier to learning.</p>
+        <p>We are seeking partnerships with:</p>
+        <div class="partner-types">
+          <ul aria-label="Partner types">
+            <li>Corporates</li>
+            <li>Banks &amp; financial institutions</li>
+            <li>Airlines &amp; travel companies</li>
+            <li>Hotels &amp; hospitality businesses</li>
+            <li>Food &amp; nutrition companies</li>
+          </ul>
+          <ul aria-label="Partner types continued">
+            <li>Foundations</li>
+            <li>Philanthropists</li>
+            <li>NGOs &amp; development organisations</li>
+            <li>Community organisations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="partner-csr">
+        <h3>Your CSR can feed more than a report. It can feed a child.</h3>
+        <p>Businesses want their social investment to be meaningful, responsible and capable of demonstrating real-world impact.</p>
+        <p>A partnership with Wendoo provides an opportunity to support a clearly defined social challenge while engaging your organisation, employees and stakeholders.</p>
+        <p>We can work with partners on CSR objectives, ESG priorities, community investment, employee engagement and philanthropic goals.</p>
+        <ul aria-label="CSR alignment areas">
+          <li>CSR objectives</li>
+          <li>ESG priorities</li>
+          <li>Community investment</li>
+          <li>Employee engagement</li>
+          <li>Philanthropic goals</li>
+        </ul>
+        <div class="partner-ways">
+          <h3>Ways to partner</h3>
+          <ul aria-label="Ways to partner">
+            <li><strong>Sponsor a child</strong> — Help provide breakfast support.</li>
+            <li><strong>Sponsor a school</strong> — Support a school breakfast programme.</li>
+            <li><strong>Support a community</strong> — Help extend the reach.</li>
+            <li><strong>Corporate partnership</strong> — Connect CSR objectives with practical impact.</li>
+            <li><strong>In-kind support</strong> — Contribute food, logistics, expertise or services.</li>
+            <li><strong>Strategic partnership</strong> — Develop sustainable, scalable programmes.</li>
+          </ul>
+        </div>
+        <a href="#partner" class="btn btn--primary">Partner With Wendoo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 STORIES -->
+  <section class="section stories" id="stories" aria-labelledby="stories-heading" data-reveal>
+    <div class="section-inner stories-grid">
+      <div>
+        <span class="overline">Stories with dignity</span>
+        <h2 id="stories-heading">Behind every number is a child.</h2>
+      </div>
+      <div class="stories-copy">
+        <p class="stories-intro">Statistics help us measure impact. Stories help us understand it.</p>
+        <p>As Wendoo’s programme develops, we will share stories from the children, families, schools and communities who make this work possible — with appropriate safeguarding and consent.</p>
+        <a href="#stories" class="btn btn--secondary">Read our stories</a>
+        <p class="disclosure"><strong>Note:</strong> Programme stories will be published as they become available, with appropriate consent and safeguarding review.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 CTA -->
+  <section class="section cta" id="cta" aria-labelledby="cta-heading" data-reveal>
+    <div class="section-inner cta-split">
+      <figure class="cta-media" aria-label="Illustrative: ready to learn">
+        <img src="/assets/story-learning.webp" alt="" width="1400" height="1120" loading="lazy" />
+        <!-- disclosure preserved once in hero only -->
+      </figure>
+      <div class="cta-copy">
+        <h2 id="cta-heading">Help us put breakfast on the table.</h2>
+        <p>Every child deserves the opportunity to start the school day nourished, ready to learn and able to fulfil their potential.</p>
+        <p>You can help make that possible.</p>
+        <div class="cta-row">
+          <button type="button" class="btn btn--primary" id="btn-donate-cta" data-action="open-donate">Donate Now</button>
+          <a href="#partner" class="btn btn--secondary">Partner With Wendoo</a>
+        </div>
+        <p class="brand-line">Putting breakfast on the table. Putting opportunity in children’s hands.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- DONATE DIALOG -->
+<dialog id="donate-dialog" class="dialog" aria-modal="true" aria-labelledby="dialog-title">
+  <form method="dialog" class="dialog-panel" role="document">
+    <header class="dialog-header">
+      <h2 id="dialog-title">Support a Child</h2>
+      <button type="submit" class="close-btn" aria-label="Close donation dialog" value="close">×</button>
+    </header>
+    <div class="dialog-body">
+      <p>The secure donation link is being prepared. Your support will make a real difference — please return shortly to complete your contribution.</p>
+      <p>No payment details should be entered on this page.</p>
+      <div class="dialog-actions">
+        <button type="submit" class="btn btn--primary" value="close">Understood</button>
+      </div>
+    </div>
+  </form>
+</dialog>
+
+<footer class="site-footer" role="contentinfo">
+  <nav aria-label="Site pages" class="footer-ia">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><span>About Us (coming soon)</span></li>
+      <li><span>Our Programme (coming soon)</span></li>
+      <li><span>Our Impact (coming soon)</span></li>
+      <li><span>Partner With Us (coming soon)</span></li>
+      <li><span>Get Involved (coming soon)</span></li>
+      <li><span>Donate (coming soon)</span></li>
+      <li><span>Contact (coming soon)</span></li>
+      <li><span>Privacy Policy (coming soon)</span></li>
+      <li><span>Terms and Conditions (coming soon)</span></li>
+      <li><span>Safeguarding (coming soon)</span></li>
+      <li><span>Complaints (coming soon)</span></li>
+    </ol>
+  </nav>
+  <p>© 2026 Wendoo School Breakfast Empowerment Initiative</p>
+  <p class="disclosure">Social profiles and contact details are coming soon. This site is noindex, nofollow until full site review is complete.</p>
+</footer>
+
+<script src="/script.js" defer></script>
+</body>
 </html>
