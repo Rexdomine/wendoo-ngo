@@ -1,0 +1,25 @@
+/* Page-scoped additions; shared homepage styling remains owned by integration. */
+.impact-page :focus-visible{outline:3px solid #10243b;outline-offset:5px}
+.impact-page .skip-link{z-index:30}
+.impact-page nav [aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
+.impact-page main{scroll-margin-top:180px}
+.impact-page .impact-hero{max-width:1240px;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,5vw,70px);align-items:center;padding-top:70px}
+.impact-page h1{font-size:clamp(2.8rem,5.5vw,5rem);line-height:1.04;letter-spacing:-.05em;margin:0 0 25px}
+.impact-page h1 span{color:var(--blue)}
+.impact-page .impact-hero-photo{display:block;width:100%;height:460px;object-fit:cover;border-radius:46% 46% 24px 24px}
+.impact-page .impact-record{background:var(--blue);color:#fff}
+.impact-page .impact-record .eyebrow{color:#dff3ff}
+.impact-page .impact-record h2,.impact-page .impact-story h2,.impact-page .impact-evidence h2{font-size:clamp(2.3rem,4.5vw,4rem);line-height:1.08}
+.impact-page .impact-record-grid,.impact-page .impact-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
+.impact-page h3{font-size:1.25rem;line-height:1.3;margin:0 0 14px}
+.impact-page .impact-record-grid article{border-top:1px solid #ffffff70;padding-top:24px}
+.impact-page .impact-record-grid p{color:#fff;margin:0}
+.impact-page .impact-story{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(32px,6vw,75px);align-items:center;scroll-margin-top:180px}
+.impact-page .impact-story img{display:block;width:100%;height:430px;object-fit:cover;border-radius:24px}
+.impact-page .impact-evidence{border-top:1px solid var(--line)}
+.impact-page .impact-evidence-heading{max-width:760px}
+.impact-page .impact-evidence-grid article{padding:28px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.impact-page .impact-evidence-grid p{color:var(--muted);margin:0}
+.impact-page .final-cta .actions{justify-content:center;margin-top:28px}
+@media(max-width:800px){.impact-page .impact-hero,.impact-page .impact-story{grid-template-columns:1fr}.impact-page .impact-hero-photo{height:380px;max-width:600px;margin:auto}.impact-page .impact-record-grid,.impact-page .impact-evidence-grid{grid-template-columns:1fr;gap:24px}.impact-page .impact-story img{height:auto;max-height:480px}.impact-page .impact-hero{padding-top:45px}}
+@media(max-width:400px){.impact-page h1{font-size:2.6rem}.impact-page .impact-hero-photo{height:300px}.impact-page .text-link{display:inline-block}.impact-page .button{width:100%}}
