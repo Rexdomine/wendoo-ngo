@@ -1,21 +1,22 @@
-/* Page-scoped additions; shared homepage styling remains owned by integration. */
+/* Page-scoped additions; explicit Impact palette is insulated from shared token changes. */
+.impact-page{--impact-blue:#2563eb;--impact-blue-dark:#1d4ed8;--impact-baby:#dbeafe;--impact-focus:#10243b}
 .impact-page :focus-visible{outline:3px solid #10243b;outline-offset:5px}
 .impact-page .skip-link{z-index:30}
 .impact-page nav [aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
 .impact-page main{scroll-margin-top:180px}
 .impact-page .impact-hero{max-width:1440px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;padding-top:48px;padding-bottom:72px}
-.impact-page .impact-hero-copy{grid-column:1/7;grid-row:1;z-index:1;background:var(--blue);color:#fff;padding:clamp(28px,3.8vw,54px);margin:64px 0 20px}
-.impact-page .impact-hero .eyebrow{color:#dff3ff}
+.impact-page .impact-hero-copy{grid-column:1/7;grid-row:1;z-index:1;background:var(--impact-blue);color:#fff;padding:clamp(28px,3.8vw,54px);margin:64px 0 20px}
+.impact-page .impact-hero .eyebrow{color:var(--impact-baby)}
 .impact-page h1{font-size:clamp(2.8rem,4.8vw,4.6rem);line-height:1.04;letter-spacing:-.05em;margin:0 0 25px}
-.impact-page h1 span{color:#dff3ff}
+.impact-page h1 span{color:var(--impact-baby)}
 .impact-page .impact-hero .section-lede{font-size:1.08rem;color:#fff;line-height:1.65}
 .impact-page .impact-hero .text-link{display:inline-block;color:#fff;margin-top:12px}
 .impact-page .impact-hero :focus-visible{outline-color:#fff}
 .impact-page .impact-hero-visual{grid-column:5/-1;grid-row:1;margin:0;align-self:start}
 .impact-page .impact-hero-photo{display:block;width:100%;height:620px;object-fit:cover;object-position:75% center}
 .impact-page .impact-hero figcaption{font-size:.75rem;line-height:1.5;color:var(--muted);text-align:right;padding:12px 0 0 28%}
-.impact-page .impact-record{background:var(--blue);color:#fff}
-.impact-page .impact-record .eyebrow{color:#dff3ff}
+.impact-page .impact-record{background:var(--impact-blue);color:#fff}
+.impact-page .impact-record .eyebrow{color:var(--impact-baby)}
 .impact-page .impact-record h2,.impact-page .impact-story h2,.impact-page .impact-evidence h2{font-size:clamp(2.3rem,4.5vw,4rem);line-height:1.08}
 .impact-page .impact-record-grid,.impact-page .impact-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
 .impact-page h3{font-size:1.25rem;line-height:1.3;margin:0 0 14px}
