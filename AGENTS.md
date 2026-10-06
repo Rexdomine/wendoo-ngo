@@ -12,3 +12,11 @@
 - Check page-scoped color requirements against the computed shared tokens. Use page-scoped variables when a page has an explicit palette so later shared-token edits cannot silently recolor it.
 - After the Preview build is ready, open each changed route and verify its referenced media and styles load from the deployed URL. Compare the deployed result with the approved handoff evidence before sharing the link.
 - Record the Preview commit, deployment URL, route checks, and any remaining issue in the owning Paperclip task.
+
+## Independent Playwright release gate
+
+- Before reporting a page task complete or asking the owner to review a Preview, NightWing must use Playwright against the actual protected Vercel Preview, not only a local server or intercepted responses.
+- NightWing must check the deployed commit and route, capture desktop and mobile screenshots, check console/network errors, verify image HTTP responses and decoded natural dimensions, compare computed palette values with the approved handoff, and check navigation and noindex.
+- For protected Previews, authenticate the Playwright context with a managed Vercel browser session or the Vercel Protection Bypass for Automation HTTP header. Store bypass secrets only in the runner secret store or environment; never put them in source, URLs, logs, screenshots, or Paperclip comments. Keep Preview protection and noindex enabled.
+- If NightWing cannot access the deployed Preview, mark the QA result blocked and name the access needed. Local browser checks are useful supplemental evidence but do not pass the deployed-preview gate.
+- Do not tell the owner that a fix is complete or send a review link until NightWing records a passing deployed-browser review against the approved evidence. Route any failure back to the implementation owner with the failing route, screenshot, request/status evidence, and root cause.
