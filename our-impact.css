@@ -1,7 +1,8 @@
-/* Page-scoped additions; explicit Impact palette is insulated from shared token changes. */
-.impact-page{--impact-blue:#2563eb;--impact-blue-dark:#1d4ed8;--impact-baby:#dbeafe;--impact-focus:#10243b}
+/* Page-scoped additions; Impact owns its approved blue and white palette. */
+.impact-page{--blue:#2563eb;--blue-dark:#1d4ed8;--sky:#dbeafe;--pale:#f5faff;--ink:#10243b;--muted:#4d6176;--white:#fff;--line:#d6e7f2;--yellow:#ffcf57;--impact-blue:#2563eb;--impact-blue-dark:#1d4ed8;--impact-baby:#dbeafe;--impact-focus:#10243b}
 .impact-page :focus-visible{outline:3px solid #10243b;outline-offset:5px}
 .impact-page .skip-link{z-index:30}
+.impact-page .site-header nav a{color:var(--ink)}
 .impact-page nav [aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
 .impact-page main{scroll-margin-top:180px}
 .impact-page .impact-hero{max-width:1440px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;padding-top:48px;padding-bottom:72px}
@@ -28,6 +29,8 @@
 .impact-page .impact-evidence-heading{max-width:760px}
 .impact-page .impact-evidence-grid article{padding:28px;background:#fff;border:1px solid var(--line);border-radius:20px}
 .impact-page .impact-evidence-grid p{color:var(--muted);margin:0}
+.impact-page .final-cta{background:var(--sky)}
+.impact-page .site-footer{background:#1d4ed8}
 .impact-page .final-cta .actions{justify-content:center;margin-top:28px}
 @media(max-width:800px){.impact-page .impact-story{grid-template-columns:1fr}.impact-page .impact-hero{grid-template-columns:1fr;padding-top:24px;padding-bottom:45px}.impact-page .impact-hero-copy{grid-column:1;grid-row:2;margin:-36px 16px 0;padding:32px 24px}.impact-page .impact-hero-visual{grid-column:1;grid-row:1;display:contents}.impact-page .impact-hero-photo{grid-column:1;grid-row:1;height:380px;object-position:75% center}.impact-page .impact-hero figcaption{grid-column:1;grid-row:3;text-align:left;padding:14px 16px 0}.impact-page .impact-record-grid,.impact-page .impact-evidence-grid{grid-template-columns:1fr;gap:24px}.impact-page .impact-story img{height:auto;max-height:480px}}
 @media(max-width:400px){.impact-page h1{font-size:2.6rem}.impact-page .impact-hero-photo{height:300px}.impact-page .text-link{display:inline-block}.impact-page .button{width:100%}}
