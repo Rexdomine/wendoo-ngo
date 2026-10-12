@@ -11,7 +11,9 @@ const root = path.resolve(__dirname, '..');
   const server = http.createServer(async (req, res) => {
     try {
       const pathname = new URL(req.url, 'http://localhost').pathname;
-      const file = path.resolve(root, '.' + (pathname === '/' ? '/index.html' : pathname));
+      let rel = pathname === '/' ? '/index.html' : pathname;
+      if (!path.extname(rel)) rel += '.html';
+      const file = path.resolve(root, '.' + rel);
       if (!file.startsWith(root + path.sep)) throw Error('Invalid path');
       const bytes = await fs.readFile(file);
       const mime = {'.html':'text/html', '.css':'text/css', '.jpg':'image/jpeg'}[path.extname(file)] || 'application/octet-stream';
@@ -39,7 +41,7 @@ const root = path.resolve(__dirname, '..');
       assert.equal(await page.locator('[aria-current="page"]').innerText(),'Donate');
       assert.equal(await page.locator('.currency-card').count(),3);
       assert.equal(await page.locator('.currency-card a, .currency-card button, input, form, script').count(),0);
-      assert.equal(await page.locator('.currency-status').allTextContents().then(x=>x.every(t=>t==='Donation link coming soon')),true);
+      assert.equal(await page.locator('.currency-status').allTextContents().then(x=>x.every(t=>t==='Details pending confirmation')),true);
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth),true,`overflow at ${width}`);
       assert.equal(await page.locator('img').evaluateAll(imgs=>imgs.every(img=>img.complete && img.naturalWidth>0)),true);
       await page.keyboard.press('Tab');

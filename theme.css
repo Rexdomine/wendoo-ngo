@@ -13,7 +13,7 @@
   --color-bone: var(--site-bone);
   --color-green: var(--site-green);
   --color-teal: var(--site-teal);
-  --color-red: var(--site-teal);
+  --color-red: var(--site-red);
   --color-muted: var(--site-muted);
   --color-line: var(--site-line);
   --color-soft: var(--site-soft);
@@ -21,7 +21,7 @@
   --bone: var(--site-bone);
   --green: var(--site-green);
   --teal: var(--site-teal);
-  --red: var(--site-teal);
+  --red: var(--site-red);
   --muted: var(--site-muted);
   --line: var(--site-line);
   --white: var(--site-white);
@@ -45,8 +45,8 @@ body { background: var(--site-bone); color: var(--site-green); }
 
 .site-header nav .nav-donate,
 .button-primary,
-.involvement-page .button-primary,
-.terms-page .site-header nav .nav-donate { background: var(--site-teal); color: var(--site-white); box-shadow: none; }
+.involvement-page .button-primary { background: var(--site-teal); color: var(--site-white); box-shadow: none; }
+.terms-page .site-header nav .nav-donate { background: var(--site-red); color: var(--site-white); box-shadow: none; }
 .site-header nav .nav-donate:hover,
 .button-primary:hover,
 .involvement-page .button-primary:hover { background: var(--site-green); color: var(--site-white); }
@@ -155,7 +155,7 @@ summary:focus-visible { outline-color: var(--site-teal); }
   --color-bone: var(--site-bone);
   --color-green: var(--site-green);
   --color-teal: var(--site-teal);
-  --color-red: var(--site-teal);
+  --color-red: var(--site-red);
   --color-muted: var(--site-muted);
   --color-line: var(--site-line);
   --color-soft: var(--site-soft);

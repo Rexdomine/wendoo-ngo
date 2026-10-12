@@ -1,18 +1,18 @@
 # Contact page handoff — REX-99
 
-Partial implementation; usable enquiry path is blocked.
+Contact page implementation; usable enquiry path is still intentionally unavailable.
 
 ## Files and integration
 
 - `contact.html`: semantic, noindex Contact page with truthful unavailable state.
 - `contact.css`: scoped layout and keyboard focus styles, loading shared `styles.css` first.
 - Route: `/contact.html` on a plain static server; Vercel clean URLs also supports `/contact`.
-- Parent integration owns homepage navigation. Add Contact navigation and replace homepage `#contact` CTA destinations when the contact route is verified. No shared files were edited here.
-- Current homepage uses blue styling (including the latest user-reviewed heading). This shell inherits that actual shared CSS. Task plan mentions bone/green/teal/red; StarLord/Product must reconcile the shared palette centrally, rather than changing the reviewed homepage here.
+- All page headers now include the `/contact` route, and homepage contact CTAs remain anchored to the homepage contact section until a verified enquiry destination is approved.
+- The refreshed site uses the shared bone, green, teal and red palette from `theme.css`.
 
 ## Evidence and blocker
 
-Repository has no submission backend. `vercel.json` has `form-action 'none'` and `script-src 'none'`. Project handoff notes and parent task report contact details as unverified. No public email, phone, address or organisation-controlled enquiry URL is available in assigned evidence. The handoff owner's administrative email is not a verified Wendoo public contact route and was not reused.
+Repository has no submission backend. `vercel.json` has `form-action 'none'` and `script-src 'none'`. No public email, phone, address or organisation-controlled enquiry URL is available in assigned evidence. The handoff owner's administrative email is not a verified Wendoo public contact route and was not reused.
 
 StarLord must obtain and record one approved organisation-controlled enquiry route and its source on the project task. A functioning form instead requires a separately approved backend/delivery/data-handling scope and Architecture review. Do not loosen CSP or provision providers as part of this shell.
 
