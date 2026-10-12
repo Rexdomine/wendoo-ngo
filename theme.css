@@ -199,9 +199,10 @@ summary:focus-visible { outline-color: var(--site-teal); }
     letter-spacing: .02em;
   }
   .mobile-menu summary::-webkit-details-marker { display: none; }
-  .mobile-menu summary span { color: var(--site-white); font-size: 1rem; line-height: 1; transition: transform .2s ease; }
+  .mobile-menu summary span { color: var(--site-white); font-size: 0; line-height: 1; }
+  .mobile-menu summary span::before { content: "☰"; font-size: 1rem; }
   .mobile-menu[open] summary { background: var(--site-teal); border-color: var(--site-teal); }
-  .mobile-menu[open] summary span { transform: rotate(90deg); }
+  .mobile-menu[open] summary span::before { content: "×"; font-size: 1.35rem; }
   .mobile-menu nav {
     position: absolute;
     top: calc(100% + .6rem);
