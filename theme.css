@@ -163,6 +163,72 @@ summary:focus-visible { outline-color: var(--site-teal); }
 }
 
 .hero-art::after { background: linear-gradient(transparent, rgba(21, 62, 53, .22)); }
+
+/* Small-screen navigation: keep the full site map behind one deliberate tap. */
+.mobile-menu { display: none; }
+
+@media (max-width: 620px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-block: var(--space-3);
+    box-shadow: 0 1px 0 rgba(21, 62, 53, .08);
+  }
+
+  .site-header > nav { display: none; }
+  .mobile-menu { display: block; position: relative; margin-left: auto; }
+  .mobile-menu summary {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    min-height: var(--target-size);
+    padding: .45rem .8rem;
+    border: 1px solid var(--site-line);
+    border-radius: var(--radius-pill);
+    color: var(--site-green);
+    background: var(--site-white);
+    cursor: pointer;
+    font-size: var(--type-small);
+    font-weight: var(--weight-bold);
+    list-style: none;
+  }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+  .mobile-menu summary span { color: var(--site-red); font-size: 1rem; line-height: 1; }
+  .mobile-menu[open] summary { background: var(--site-green); color: var(--site-white); border-color: var(--site-green); }
+  .mobile-menu[open] summary span { color: var(--site-white); }
+  .mobile-menu nav {
+    position: absolute;
+    top: calc(100% + .6rem);
+    right: 0;
+    display: grid;
+    min-width: min(18rem, calc(100vw - 2rem));
+    padding: .45rem;
+    border: 1px solid var(--site-line);
+    border-radius: .6rem;
+    background: var(--site-white);
+    box-shadow: 0 14px 30px rgba(21, 62, 53, .16);
+  }
+  .mobile-menu nav a {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: .55rem .7rem;
+    border-radius: .35rem;
+    color: var(--site-green);
+    text-decoration: none;
+  }
+  .mobile-menu nav a:hover,
+  .mobile-menu nav a:focus-visible { background: var(--site-soft); color: var(--site-green); }
+  .mobile-menu nav a[aria-current="page"] { background: var(--site-green); color: var(--site-white); text-decoration: none; }
+  .mobile-menu nav a.nav-donate { margin-top: .3rem; justify-content: center; background: var(--site-red); color: var(--site-white); }
+  .mobile-menu nav a.nav-donate:hover,
+  .mobile-menu nav a.nav-donate:focus-visible { background: var(--site-green); color: var(--site-white); }
+}
 .art-card { box-shadow: 0 15px 35px rgba(21, 62, 53, .27); }
 .intro-photo img,
 .school-day-inner img,
