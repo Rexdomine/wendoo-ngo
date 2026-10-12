@@ -193,7 +193,7 @@ summary:focus-visible { outline-color: var(--site-teal); }
     color: var(--site-white);
     background: var(--site-green);
     cursor: pointer;
-    font-size: var(--type-small);
+    font-size: 0;
     font-weight: var(--weight-bold);
     list-style: none;
     letter-spacing: .02em;
