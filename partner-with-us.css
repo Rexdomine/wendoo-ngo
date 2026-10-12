@@ -1,0 +1,40 @@
+/* Page-level scale proposal: reusable editorial spacing, typography and focus
+   tokens. Brand colours, buttons, shell and base type inherit styles.css. */
+.partnership-page {
+  --partner-space-1: .5rem;
+  --partner-space-2: 1rem;
+  --partner-space-3: 1.5rem;
+  --partner-space-4: 2rem;
+  --partner-space-5: 3rem;
+  --partner-space-6: 4rem;
+  --partner-title: clamp(2.5rem, 5vw, 4.75rem);
+  --partner-heading: clamp(2rem, 4vw, 3.5rem);
+  --partner-card-title: 1.4rem;
+  --partner-body: 1rem;
+  --partner-line-heading: 1.08;
+  --partner-weight: 700;
+  --partner-focus-width: 3px;
+}
+.partnership-page :focus-visible { outline: var(--partner-focus-width) solid var(--blue); outline-offset: var(--partner-space-1); }
+.partnership-page .partner :focus-visible { outline-color: var(--white); }
+.partnership-page [aria-current="page"] { text-decoration: underline; text-underline-offset: var(--partner-space-1); }
+.partnership-hero { gap: var(--partner-space-5); margin-bottom: 0; padding-block: var(--partner-space-6); }
+.partnership-hero h1 { text-transform: none; font-size: var(--partner-title); line-height: var(--partner-line-heading); }
+.partnership-hero .actions { margin-top: var(--partner-space-4); }
+.partnership-visual { padding: var(--partner-space-5); border-radius: var(--radius); background: var(--blue); color: var(--white); }
+.partnership-visual .eyebrow { color: var(--sky); }
+.partnership-visual > p { font-size: var(--partner-heading); font-weight: var(--partner-weight); line-height: var(--partner-line-heading); margin-block: var(--partner-space-4); }
+.partnership-visual > p span { color: var(--sky); }
+.partnership-rule { width: var(--partner-space-5); height: var(--partner-focus-width); background: var(--yellow); margin-block: var(--partner-space-4); }
+.partnership-paths h2,.partnership-next h2 { font-size: var(--partner-heading); line-height: var(--partner-line-heading); }
+.partnership-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--partner-space-3); margin-top: var(--partner-space-5); }
+.partnership-grid article { padding: var(--partner-space-4); background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); }
+.partnership-grid h3 { font-size: var(--partner-card-title); line-height: 1.25; margin-block: var(--partner-space-3) var(--partner-space-2); }
+.partnership-grid p { color: var(--muted); font-size: var(--partner-body); margin: 0; }
+.partnership-responsibility { display: grid; grid-template-columns: 1fr 1fr; gap: var(--partner-space-6); align-items: center; }
+.partnership-responsibility h2 { font-size: var(--partner-heading); line-height: var(--partner-line-heading); }
+.partnership-responsibility .button { margin-top: var(--partner-space-2); }
+.partnership-next { max-width: 850px; }
+.partnership-next .button { margin-top: var(--partner-space-3); }
+@media(max-width:900px) { .partnership-grid { grid-template-columns: repeat(2,1fr); } .partnership-hero { grid-template-columns: 1fr 1fr; gap: var(--partner-space-4); } .partnership-visual { padding: var(--partner-space-4); } }
+@media(max-width:620px) { .partnership-hero { display: block; padding-block: var(--partner-space-5); } .partnership-visual { margin-top: var(--partner-space-5); } .partnership-grid,.partnership-responsibility { grid-template-columns: 1fr; gap: var(--partner-space-3); } .partnership-grid article { padding: var(--partner-space-3); } .partnership-page .site-header { position: static; } }

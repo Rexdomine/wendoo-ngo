@@ -1,0 +1,12 @@
+/* Contact-only layout; shared homepage styles remain owned by integration. */
+.contact-page .contact-intro { max-width: 1000px; padding-block: clamp(48px, 8vw, 100px); }
+.contact-page h1 { max-width: 850px; margin: 0 0 24px; font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.08; letter-spacing: -.045em; }
+.contact-page .contact-availability { margin: 36px 0 28px; padding: clamp(22px, 4vw, 36px); background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 18px; }
+.contact-page .contact-availability h2 { margin: 0 0 14px; font-size: clamp(1.4rem, 3vw, 1.8rem); line-height: 1.3; letter-spacing: -.02em; }
+.contact-page .contact-availability p { max-width: 62ch; color: var(--muted); }
+.contact-page .contact-availability p:last-child { margin-bottom: 0; }
+.contact-page a:focus-visible { outline: 3px solid var(--ink); outline-offset: 5px; }
+.contact-page .skip-link:focus { position: fixed; z-index: 30; }
+.contact-page nav [aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+.contact-page #main { scroll-margin-top: 180px; }
+@media (max-width: 620px) { .contact-page h1 br { display: none; } }
