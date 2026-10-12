@@ -1,0 +1,229 @@
+/* Wendoo shared palette: derived from the About page's editorial system. */
+:root {
+  --site-bone: #f7f4ec;
+  --site-green: #153e35;
+  --site-teal: #216d62;
+  --site-red: #b93836;
+  --site-muted: #4d625b;
+  --site-line: #d5dcd3;
+  --site-soft: #e8e8dc;
+  --site-white: #fff;
+
+  /* Bridge the page-level token names used by the existing static pages. */
+  --color-bone: var(--site-bone);
+  --color-green: var(--site-green);
+  --color-teal: var(--site-teal);
+  --color-red: var(--site-teal);
+  --color-muted: var(--site-muted);
+  --color-line: var(--site-line);
+  --color-soft: var(--site-soft);
+  --color-white: var(--site-white);
+  --bone: var(--site-bone);
+  --green: var(--site-green);
+  --teal: var(--site-teal);
+  --red: var(--site-teal);
+  --muted: var(--site-muted);
+  --line: var(--site-line);
+  --white: var(--site-white);
+  --blue: var(--site-teal);
+  --blue-dark: var(--site-green);
+  --sky: var(--site-soft);
+  --pale: var(--site-bone);
+  --ink: var(--site-green);
+  --yellow: var(--site-teal);
+}
+
+body { background: var(--site-bone); color: var(--site-green); }
+.site-header { background: var(--site-bone); border-color: var(--site-line); }
+.site-header nav a,
+.terms-page .site-header nav a,
+.impact-page .site-header nav a { color: var(--site-green); }
+.site-header nav a:hover,
+.text-link:hover,
+.site-header nav [aria-current],
+.site-header nav [aria-current="page"] { color: var(--site-teal); text-decoration-color: var(--site-teal); }
+
+.site-header nav .nav-donate,
+.button-primary,
+.involvement-page .button-primary,
+.terms-page .site-header nav .nav-donate { background: var(--site-teal); color: var(--site-white); box-shadow: none; }
+.site-header nav .nav-donate:hover,
+.button-primary:hover,
+.involvement-page .button-primary:hover { background: var(--site-green); color: var(--site-white); }
+.impact-page .site-header nav .nav-donate,
+.involvement-page .site-header nav .nav-donate { color: var(--site-white); }
+.button-secondary { background: var(--site-white); color: var(--site-teal); border-color: var(--site-teal); }
+.button-light,
+.button-white { background: var(--site-bone); color: var(--site-green); }
+
+.eyebrow,
+.text-link,
+.snapshot-label,
+.step-number,
+.involvement-number,
+.currency-symbol,
+.currency-card .currency-status,
+.person-role,
+.legal-copy a,
+.legal-contents a { color: var(--site-teal); }
+
+a:focus-visible,
+.contact-page a:focus-visible,
+.involvement-page a:focus-visible,
+.partnership-page :focus-visible,
+.terms-page a:focus-visible,
+.legal-page a:focus-visible,
+summary:focus-visible { outline-color: var(--site-teal); }
+
+.hero-art { background: var(--site-soft); }
+.sun,
+.art-card,
+.school-day,
+.partner,
+.purpose,
+.partnership-visual,
+.impact-page .impact-hero-copy,
+.impact-page .impact-record,
+.involvement-next,
+.mission { background: var(--site-teal); }
+.art-rule,
+.partnership-rule { background: var(--site-teal); }
+
+.approach,
+.about,
+.final-cta,
+.programme-support,
+.impact-page .final-cta,
+.support-note,
+.availability-note { background: var(--site-soft); }
+.intro-photo::before { background: var(--site-soft); }
+
+.approach-grid article,
+.about-details article,
+.about-snapshot article,
+.partnership-grid article,
+.involvement-grid article,
+.impact-page .impact-evidence-grid article,
+.currency-card,
+.registration,
+.contact-page .contact-availability { background: var(--site-white); border-color: var(--site-line); }
+.commitments span { background: var(--site-white); border-color: var(--site-line); color: var(--site-green); }
+.note,
+.contact > p:last-child { background: var(--site-soft); border-color: var(--site-teal); color: var(--site-muted); }
+.contact-page .contact-availability { border-left-color: var(--site-teal); }
+
+.site-footer,
+.involvement-page .site-footer,
+.terms-page .site-footer,
+.impact-page .site-footer { background: var(--site-green); color: var(--site-bone); }
+.site-footer p,
+.site-footer small,
+.involvement-page .site-footer p,
+.involvement-page .site-footer small,
+.terms-page .site-footer p,
+.terms-page .site-footer small { color: var(--site-bone); border-color: var(--site-muted); }
+.site-footer a:hover { color: var(--site-white); }
+
+.terms-page {
+  --legal-bone: var(--site-bone);
+  --legal-green: var(--site-green);
+  --legal-teal: var(--site-teal);
+  --legal-red: var(--site-teal);
+  --legal-muted: var(--site-muted);
+  --legal-line: var(--site-line);
+}
+
+.impact-page,
+.involvement-page {
+  --blue: var(--site-teal);
+  --blue-dark: var(--site-green);
+  --sky: var(--site-soft);
+  --pale: var(--site-bone);
+  --ink: var(--site-green);
+  --muted: var(--site-muted);
+  --line: var(--site-line);
+}
+
+.impact-page {
+  --impact-blue: var(--site-teal);
+  --impact-blue-dark: var(--site-green);
+  --impact-baby: var(--site-soft);
+  --impact-focus: var(--site-green);
+}
+
+.involvement-page {
+  --color-bone: var(--site-bone);
+  --color-green: var(--site-green);
+  --color-teal: var(--site-teal);
+  --color-red: var(--site-teal);
+  --color-muted: var(--site-muted);
+  --color-line: var(--site-line);
+  --color-soft: var(--site-soft);
+  --color-white: var(--site-white);
+}
+
+.hero-art::after { background: linear-gradient(transparent, rgba(21, 62, 53, .22)); }
+.art-card { box-shadow: 0 15px 35px rgba(21, 62, 53, .27); }
+.intro-photo img,
+.school-day-inner img,
+.accountability-photo img { box-shadow: 0 20px 50px rgba(21, 62, 53, .14); }
+.photo-caption { text-shadow: 0 1px 6px rgba(21, 62, 53, .6); }
+.purpose-mark,
+.purpose-note strong { color: var(--site-soft); }
+.purpose-caption { border-color: var(--site-muted); }
+
+/* Reconcile legacy page-local accents with the About-page palette. */
+html { background: var(--site-bone); }
+
+.hero-art,
+.partnership-visual,
+.impact-page .impact-hero-copy,
+.impact-page .impact-record,
+.purpose,
+.school-day,
+.partner,
+.involvement-next,
+.mission { box-shadow: none; }
+
+.hero-art { box-shadow: 0 26px 70px rgba(21, 62, 53, .13); }
+.school-day .eyebrow,
+.partner .eyebrow,
+.purpose .eyebrow { color: var(--site-bone); }
+.partner h2 span,
+.partner-options p { color: var(--site-bone); }
+.growth-steps i { color: var(--site-muted); }
+.partnership-rule { background: var(--site-bone); }
+.trust-line,
+.governance-note p,
+.availability-note p,
+.support-note p:not(.eyebrow) { color: var(--site-muted); }
+.school-day-inner img { box-shadow: 0 20px 55px rgba(21, 62, 53, .25); }
+.site-footer small { border-color: var(--site-muted); }
+
+/* Donate is the site's sole high-attention conversion accent. */
+.site-header nav .nav-donate,
+.site-header nav .nav-donate[aria-current="page"] {
+  background: var(--site-red);
+  color: var(--site-white);
+}
+.site-header nav .nav-donate:hover,
+.site-header nav .nav-donate:active {
+  background: #982a29;
+  color: var(--site-white);
+}
+.site-header nav .nav-donate:focus-visible {
+  outline: 3px solid var(--site-green);
+  outline-offset: 4px;
+}
+
+/* Keep page-specific focus and active states on the same high-contrast system. */
+.impact-page :focus-visible,
+.partnership-page :focus-visible,
+.contact-page a:focus-visible,
+.legal-page a:focus-visible { outline-color: var(--site-teal); }
+.impact-page .impact-hero :focus-visible,
+.impact-page .impact-record :focus-visible,
+.partner :focus-visible,
+.involvement-next :focus-visible,
+.mission :focus-visible,
+.site-footer a:focus-visible { outline-color: var(--site-bone); }

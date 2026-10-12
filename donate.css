@@ -3,3 +3,31 @@
 @media(max-width:900px){.site-header{align-items:flex-start;flex-direction:column;gap:10px}.donate-intro{gap:32px;grid-template-columns:1.2fr .8fr}.purpose-note{padding:28px;min-height:340px}.giving-heading>p{max-width:260px}.currency-card{padding:20px}.support-note{padding:32px;gap:32px}}
 @media(max-width:620px){.site-header{padding:16px 20px}.brand img{width:125px}.site-header nav{display:grid;grid-template-columns:repeat(3,1fr);width:100%;gap:4px 10px}.site-header nav a{justify-content:center;font-size:.76rem}.site-header nav .nav-donate{padding:8px 14px}main{padding:0 20px}.donate-intro{padding:44px 0;grid-template-columns:1fr;gap:30px}h1{font-size:clamp(2.7rem,10vw,3.7rem)}.purpose-note{min-height:0;border-radius:16px;padding:24px;display:grid;grid-template-columns:1fr auto;gap:12px}.purpose-mark{grid-column:2;grid-row:1;margin:0;font-size:3rem;align-self:end}.purpose-note p{grid-column:1;grid-row:1;margin:0;font-size:1.4rem}.purpose-caption{grid-column:1/-1;font-size:.72rem;margin-top:8px}.giving{padding:40px 0}.giving-heading{display:block}.giving-heading>p{max-width:none}.currency-grid{grid-template-columns:1fr;gap:14px}.currency-card{padding:24px}.currency-top{margin-bottom:18px}.currency-card>p{margin-bottom:20px}.availability-note{padding:16px}.support-note{grid-template-columns:1fr;padding:26px;gap:24px;margin-bottom:48px}.giving-questions{margin-bottom:55px}.site-footer{grid-template-columns:1fr;padding:35px 20px;gap:18px}.site-footer small{grid-column:1}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Donate hero refinement: a focused giving statement with a paper purpose card. */
+.donate-intro{position:relative;isolation:isolate;width:100vw;margin-left:calc(50% - 50vw);padding:clamp(4.5rem,8vw,7.5rem) max(2rem,calc((100vw - 1112px)/2)) clamp(4.5rem,7vw,6.5rem);display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(3rem,8vw,8rem);align-items:center;background:var(--green);color:var(--bone);overflow:hidden}
+.donate-intro::before,.donate-intro::after{content:"";position:absolute;z-index:-1;border:1px solid rgba(247,244,235,.18);border-radius:50%;pointer-events:none}
+.donate-intro::before{width:clamp(24rem,46vw,42rem);height:clamp(24rem,46vw,42rem);right:-16rem;top:-21rem}
+.donate-intro::after{width:clamp(19rem,34vw,30rem);height:clamp(19rem,34vw,30rem);right:-10rem;bottom:-18rem}
+.intro-copy{position:relative;z-index:1}
+.donate-intro .eyebrow{color:#d5e0d7}
+.donate-intro h1{max-width:680px;color:var(--bone);margin-bottom:28px}
+.donate-intro h1 em{color:#cfe0d3}
+.intro-copy>p:not(.eyebrow){max-width:540px;color:rgba(247,244,235,.78)}
+.intro-copy .lede{font-size:1.25rem;line-height:1.5;color:var(--bone);max-width:490px}
+.donate-intro .text-link{color:var(--bone);text-decoration-color:var(--red)}
+.purpose-note{background:var(--bone);color:var(--green);border-top:8px solid var(--red);border-radius:0 0 18px 18px;box-shadow:18px 18px 0 rgba(247,244,235,.1)}
+.purpose-note::before{content:"";position:absolute;inset:1.25rem;border:1px solid var(--line);pointer-events:none}
+.donate-intro .purpose-note strong{color:var(--red)}
+.purpose-caption{border-color:var(--line)}
+.donate-intro .purpose-note{justify-content:center}
+
+@media(max-width:620px){
+  .donate-intro{padding:4rem 20px 4.5rem;grid-template-columns:1fr;gap:2.75rem}
+  .donate-intro::before{right:-15rem;top:-12rem}
+  .donate-intro::after{right:-13rem;bottom:-12rem}
+  .purpose-note{grid-template-columns:1fr;border-radius:0 0 14px 14px;box-shadow:10px 10px 0 rgba(247,244,235,.1)}
+  .purpose-note::before{inset:1rem}
+  .purpose-note p{grid-column:1}
+  .purpose-caption{grid-column:1}
+}
