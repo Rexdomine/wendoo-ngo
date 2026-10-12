@@ -164,6 +164,17 @@ summary:focus-visible { outline-color: var(--site-teal); }
 
 .hero-art::after { background: linear-gradient(transparent, rgba(21, 62, 53, .22)); }
 
+/* Keep directional glyphs in text presentation so mobile browsers do not swap them for emoji. */
+.text-link span[aria-hidden="true"],
+.button span[aria-hidden="true"],
+.legal-top span[aria-hidden="true"],
+.legal-return span[aria-hidden="true"],
+.growth-steps i {
+  font-family: Arial, Helvetica, sans-serif;
+  font-variant-emoji: text;
+  text-rendering: geometricPrecision;
+}
+
 /* Small-screen navigation: keep the full site map behind one deliberate tap. */
 .mobile-menu { display: none; }
 
