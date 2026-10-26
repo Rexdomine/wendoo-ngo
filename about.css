@@ -13,3 +13,108 @@
 @media(max-width:60rem){.site-header{align-items:flex-start;flex-direction:column;gap:var(--space-4)}.site-header nav{width:100%;justify-content:space-between;gap:var(--space-3)}.about-hero,.story{gap:var(--space-6)}.section-heading{display:block}.section-heading>p{margin-top:var(--space-5)}.next-step{align-items:flex-start;flex-direction:column}.footer-inner{grid-template-columns:1fr 2fr}.footer-inner>.text-link{grid-column:1/-1}}
 @media(max-width:40rem){.page-wrap{padding-inline:var(--space-5)}.site-header{padding:var(--space-4) var(--space-5)}.brand img{width:8rem}.site-header nav{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-2)}.site-header nav a{font-size:var(--type-small)}.about-hero{grid-template-columns:1fr;gap:var(--space-7);padding-block:var(--space-7)}.hero-photo img{aspect-ratio:1/1;}.section-space{padding-block:var(--space-8)}.story{grid-template-columns:1fr}.mission-inner{padding-block:var(--space-8)}.people-list{grid-template-columns:1fr}.registration dl{grid-template-columns:1fr;gap:var(--space-5)}.registration{padding:var(--space-5);margin-top:var(--space-5)}.footer-inner{grid-template-columns:1fr}.footer-inner>.text-link{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* About hero: a field-note composition distinct from the Home split hero. */
+.about-hero {
+  display: block;
+  padding-block: clamp(2rem, 5vw, 4rem) clamp(4rem, 8vw, 7rem);
+}
+.about-hero .hero-photo {
+  position: relative;
+  margin: 0;
+}
+.about-hero .hero-photo img {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  object-position: center;
+  border-radius: var(--radius-small) var(--radius-small) 0 0;
+}
+.about-hero .hero-photo figcaption {
+  position: absolute;
+  right: var(--space-5);
+  bottom: var(--space-4);
+  max-width: 18rem;
+  margin: 0;
+  color: var(--color-white);
+  font-size: var(--type-small);
+  line-height: 1.4;
+  text-align: right;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .32);
+}
+.about-hero .hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin: -7rem 0 0;
+  padding: clamp(2rem, 4vw, 3rem);
+  background: var(--color-green);
+  color: var(--color-bone);
+}
+.about-hero .hero-copy .eyebrow { color: var(--color-bone); }
+.about-hero .hero-copy > p:not(.eyebrow):not(.lede) { color: var(--color-bone); opacity: .82; }
+.about-hero .hero-copy em { color: var(--color-bone); }
+.about-hero .hero-copy .text-link { color: var(--color-bone); }
+
+@media(max-width:40rem) {
+  .about-hero { padding-block: var(--space-6) var(--space-8); }
+  .about-hero .hero-photo img { aspect-ratio: 1.2 / 1; }
+  .about-hero .hero-photo figcaption {
+    right: var(--space-4);
+    bottom: var(--space-3);
+    max-width: 13rem;
+  }
+  .about-hero .hero-copy {
+    margin-top: -2.5rem;
+    padding: var(--space-5);
+  }
+}
+
+/* Mission image: learning remains primary, with breakfast present in the setting. */
+.mission-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, .82fr);
+  gap: clamp(2rem, 7vw, 7rem);
+  align-items: center;
+}
+.mission-copy { min-width: 0; }
+.mission-photo {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 28rem);
+  margin: 0 1.25rem 1.25rem 0;
+}
+.mission-photo::before {
+  content: "";
+  position: absolute;
+  inset: 1.1rem -1.1rem -1.1rem 1.1rem;
+  border: 1px solid var(--color-bone);
+  opacity: .72;
+  pointer-events: none;
+}
+.mission-photo img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 58%;
+  clip-path: polygon(9% 0, 100% 0, 100% 92%, 90% 100%, 0 100%, 0 8%);
+}
+@media(max-width:60rem) {
+  .mission-inner { grid-template-columns: minmax(0, 1fr) minmax(17rem, .7fr); gap: 2rem; }
+}
+@media(max-width:40rem) {
+  .mission-inner { display: block; }
+  .mission-photo { width: min(100%, 25rem); margin: 2.5rem auto .75rem; }
+  .mission-photo::before { inset: .75rem -.75rem -.75rem .75rem; }
+}
+
+/* Keep the amendment's two calls to action grouped without changing the page system. */
+.next-step-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); flex-shrink: 0; }
+.next-step .button-light { border: 1px solid var(--color-green); }
+@media (max-width: 40rem) {
+  .next-step-actions { width: 100%; flex-direction: column; }
+  .next-step-actions .button { width: 100%; }
+}

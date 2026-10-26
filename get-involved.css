@@ -20,12 +20,16 @@
 .involvement-page .button-primary:hover { background: var(--color-green); }
 .involvement-page a:focus-visible { outline: 3px solid var(--color-red); outline-offset: 4px; }
 .involvement-wrap { max-width: var(--page-width); margin-inline: auto; padding: var(--space-6) var(--space-4); }
-.involvement-hero { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center; }
+.involvement-hero { max-width: none; padding: clamp(4rem, 8vw, 7rem) max(1.5rem, calc((100vw - var(--page-width)) / 2)) clamp(4rem, 7vw, 6rem); background: var(--color-green); color: var(--color-bone); }
+.involvement-hero-intro { max-width: var(--page-width); margin-inline: auto; display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(2rem, 8vw, 8rem); align-items: end; padding-top: var(--space-3); border-top: 1px solid rgba(247,244,236,.35); }
+.involvement-hero .eyebrow { color: var(--color-bone); }
+.involvement-hero h1 span { color: var(--color-bone); }
+.involvement-hero-action { max-width: 30rem; }
 .involvement-page h1 { font-size: var(--text-title); line-height: 1.05; letter-spacing: -.045em; margin: 0 0 var(--space-3); }
-.involvement-page h1 span { color: var(--color-teal); }
-.involvement-lede { font-size: var(--text-lede); margin: 0 0 var(--space-4); max-width: 36rem; }
-.involvement-photo { margin: 0; }
-.involvement-photo img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--radius-photo); }
+.involvement-lede { font-size: var(--text-lede); margin: 0 0 var(--space-4); max-width: 36rem; color: var(--color-bone); }
+.involvement-photo { position: relative; max-width: var(--page-width); margin: clamp(3rem, 6vw, 5rem) auto 0; }
+.involvement-photo img { display: block; width: 100%; height: auto; aspect-ratio: 2.2 / 1; object-fit: cover; object-position: center; clip-path: polygon(0 0, 100% 0, 100% 94%, 98% 100%, 2% 100%, 0 94%); }
+.involvement-photo::after { content: "Shared effort in practice"; position: absolute; right: 1.25rem; bottom: .9rem; color: var(--color-bone); font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
 .involvement-ways { padding-top: var(--space-5); padding-bottom: var(--space-7); }
 .involvement-heading { max-width: 44rem; margin-bottom: var(--space-4); }
 .involvement-page h2 { font-size: var(--text-heading); line-height: 1.12; letter-spacing: -.035em; margin: 0 0 var(--space-3); }
@@ -46,9 +50,238 @@
 @media(max-width: 900px) { .involvement-hero { gap: var(--space-4); } .involvement-grid { gap: var(--space-2); } .involvement-grid article { padding: var(--space-3); } }
 @media(max-width: 620px) {
   .involvement-wrap { padding: var(--space-5) var(--space-3); }
-  .involvement-hero,.involvement-grid,.involvement-next-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .involvement-hero { padding: var(--space-5) var(--space-3) var(--space-5); }
+  .involvement-hero-intro,.involvement-grid,.involvement-next-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .involvement-photo { margin-top: var(--space-5); }
   .involvement-photo img { aspect-ratio: 4 / 3; }
+  .involvement-photo::after { right: .75rem; bottom: .65rem; font-size: .67rem; }
   .involvement-page .site-header { padding: var(--space-2) var(--space-3); }
   .involvement-page .site-header nav a { justify-content: center; }
   .involvement-number { margin-bottom: var(--space-2); }
+}
+
+/* Editorial refinement: let the copy set the rhythm instead of forcing uniform cards. */
+.involvement-hero-intro { align-items: start; }
+.involvement-hero-action { padding-top: .35rem; }
+.involvement-hero-action > p { margin-bottom: var(--space-3); }
+.involvement-hero-action .button { margin-top: .35rem; }
+.involvement-photo::after { content: none; }
+.involvement-ways { padding-top: clamp(4rem, 8vw, 7rem); }
+.involvement-heading { max-width: 52rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.involvement-heading h2 { max-width: 42rem; }
+.involvement-support-line { max-width: 40rem; margin-bottom: var(--space-3); color: var(--color-teal); font-size: 1.05rem; letter-spacing: .01em; }
+.involvement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; align-items: start; background: var(--color-line); border-block: 1px solid var(--color-line); }
+.involvement-grid article { min-width: 0; display: block; padding: clamp(1.75rem, 3vw, 2.75rem); border: 0; border-radius: 0; background: var(--color-white); }
+.involvement-grid article h3 { max-width: 19rem; margin-bottom: var(--space-3); font-size: clamp(1.35rem, 2.2vw, 1.75rem); line-height: 1.15; }
+.involvement-grid article p { color: var(--color-muted); }
+.involvement-grid article .involvement-card-title { color: var(--color-green); font-size: .9rem; line-height: 1.35; }
+.involvement-number { display: none; }
+.involvement-card-link { display: inline-flex; margin-top: var(--space-2); padding-bottom: .2rem; border-bottom: 1px solid currentColor; color: var(--color-green); font-weight: 700; text-decoration: none; }
+.involvement-card-link:hover { color: var(--color-red); }
+.involvement-next-grid { gap: clamp(2rem, 8vw, 8rem); }
+.involvement-next-grid > div:first-child h2 { max-width: 30rem; }
+.opportunity-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: var(--space-4) 0; border-top: 1px solid rgba(247,244,236,.28); }
+.opportunity-list p { margin: 0; padding: .8rem 0; border-bottom: 1px solid rgba(247,244,236,.28); }
+.involvement-conversation { padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
+.enquiry-form { max-width: none; padding: var(--space-5) 0 0; border: 0; border-top: 1px solid var(--color-line); border-radius: 0; background: transparent; }
+.form-grid { padding-bottom: var(--space-5); border-bottom: 1px solid var(--color-line); }
+.enquiry-form label, .enquiry-form legend { letter-spacing: .02em; }
+.enquiry-form fieldset { padding: var(--space-5) 0; border: 0; border-bottom: 1px solid var(--color-line); }
+.interest-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem 1.5rem; }
+.enquiry-form input, .enquiry-form textarea { background: var(--color-white); }
+.enquiry-form .button { margin-top: var(--space-2); }
+.involvement-vision { padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
+.involvement-vision h2 { max-width: 34rem; }
+.involvement-vision .involvement-card-title { max-width: 28rem; font-size: 1.1rem; line-height: 1.35; }
+@media(max-width: 900px) {
+  .involvement-grid { grid-template-columns: 1fr 1fr; }
+  .interest-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media(max-width: 620px) {
+  .involvement-grid { grid-template-columns: 1fr; }
+  .involvement-grid article { padding: 1.75rem var(--space-3); }
+  .opportunity-list, .interest-grid { grid-template-columns: 1fr; }
+  .enquiry-form .button { width: 100%; }
+  .involvement-vision { display: block; }
+  .involvement-vision > div + div { margin-top: var(--space-5); }
+}
+
+/* Keep the contribution grid on one calm surface; no exposed row gaps or accent slivers. */
+.involvement-grid { gap: 0; align-items: stretch; background: var(--color-white); border: 1px solid var(--color-line); }
+.involvement-grid article { display: block; border: 0; border-right: 1px solid var(--color-line); border-bottom: 1px solid var(--color-line); }
+.involvement-grid article:nth-child(2n) { border-right: 0; }
+.involvement-grid article:nth-last-child(-n + 2) { border-bottom: 0; }
+@media(max-width: 620px) {
+  .involvement-grid article { border-right: 0; }
+  .involvement-grid article:nth-last-child(-n + 2) { border-bottom: 1px solid var(--color-line); }
+  .involvement-grid article:last-child { border-bottom: 0; }
+}
+
+/* Let each card finish with its own copy instead of stretching to its row neighbour. */
+.involvement-grid { display: flex; flex-wrap: wrap; align-items: flex-start; }
+.involvement-grid article { flex: 0 0 50%; height: auto; border-bottom: 1px solid var(--color-line); }
+.involvement-grid article:nth-last-child(-n + 2) { border-bottom: 1px solid var(--color-line); }
+@media(max-width: 620px) {
+  .involvement-grid article { flex-basis: 100%; }
+  .involvement-grid article:last-child { border-bottom: 0; }
+}
+
+/* Premium enquiry treatment: editorial invitation beside one focused, high-contrast form panel. */
+.involvement-conversation { display: grid; grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: start; }
+.involvement-conversation .involvement-heading { margin: 0; padding-top: .4rem; }
+.involvement-conversation .involvement-heading h2 { max-width: 28rem; font-size: clamp(2.2rem, 4vw, 3.7rem); }
+.involvement-conversation .involvement-heading > p:last-child { max-width: 32rem; font-size: 1.05rem; line-height: 1.7; }
+.enquiry-form { width: 100%; max-width: none; display: grid; gap: var(--space-4); padding: clamp(1.5rem, 3vw, 2.75rem); border: 1px solid rgba(247,244,236,.18); border-radius: 1.5rem; background: var(--color-green); box-shadow: 0 1.5rem 3.5rem rgba(21,62,53,.15); }
+.enquiry-form label, .enquiry-form legend { color: var(--color-bone); }
+.enquiry-form label > span { color: rgba(247,244,236,.64); }
+.form-grid { gap: 1.1rem; padding-bottom: var(--space-4); border-bottom: 1px solid rgba(247,244,236,.2); }
+.enquiry-form input, .enquiry-form textarea { border-color: rgba(247,244,236,.28); border-radius: .55rem; background: rgba(247,244,236,.08); color: var(--color-bone); }
+.enquiry-form input::placeholder, .enquiry-form textarea::placeholder { color: rgba(247,244,236,.56); }
+.enquiry-form input:focus, .enquiry-form textarea:focus { border-color: var(--color-bone); outline: 2px solid var(--color-red); outline-offset: 2px; }
+.enquiry-form fieldset { padding: var(--space-4) 0; border-color: rgba(247,244,236,.2); }
+.enquiry-form .interest-grid { gap: .8rem 1rem; }
+.enquiry-form .interest-grid label { color: var(--color-bone); }
+.enquiry-form .interest-grid input { background: var(--color-bone); accent-color: var(--color-red); }
+.enquiry-form .message-field { gap: .7rem; }
+.involvement-page .enquiry-form .button-primary { width: 100%; justify-content: center; margin-top: .2rem; border: 0; background: var(--color-red); color: var(--color-white); }
+.involvement-page .enquiry-form .button-primary:hover { background: var(--color-bone); color: var(--color-green); }
+@media(max-width: 900px) {
+  .involvement-conversation { grid-template-columns: 1fr; gap: var(--space-5); }
+  .involvement-conversation .involvement-heading { max-width: 42rem; }
+}
+@media(max-width: 620px) {
+  .enquiry-form { border-radius: 1.1rem; }
+  .enquiry-form .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Extend the existing page system for the client's complete Build With Wendoo copy. */
+.involvement-hero-action > p { color: var(--color-bone); }
+.involvement-question { font-weight: 700; }
+.involvement-support-line,
+.involvement-card-title { font-weight: 700; letter-spacing: .04em; }
+.involvement-support-line { color: var(--color-teal); }
+.involvement-grid article { display: flex; flex-direction: column; }
+.involvement-grid article .button { align-self: flex-start; margin-top: auto; }
+.involvement-grid article ul { margin: 0 0 var(--space-3); padding-left: 1.2rem; }
+.involvement-grid article li { margin-bottom: .35rem; }
+.involvement-grid article p { color: var(--color-green); }
+.involvement-next .involvement-lede { font-weight: 700; color: var(--color-white); }
+.involvement-conversation { padding-top: var(--space-7); padding-bottom: var(--space-7); }
+.enquiry-form { display: grid; gap: var(--space-4); max-width: 58rem; padding: var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-card); background: var(--color-white); }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.enquiry-form label,
+.enquiry-form legend { color: var(--color-green); font-size: var(--text-small); font-weight: 700; letter-spacing: .06em; }
+.enquiry-form label { display: grid; gap: .45rem; }
+.enquiry-form label > span { color: var(--color-muted); font-size: .75rem; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.enquiry-form input,
+.enquiry-form textarea { width: 100%; border: 1px solid var(--color-line); border-radius: .4rem; background: var(--color-bone); color: var(--color-green); font: inherit; padding: .8rem .9rem; }
+.enquiry-form textarea { min-height: 9rem; resize: vertical; }
+.enquiry-form fieldset { margin: 0; padding: var(--space-3); border: 1px solid var(--color-line); }
+.enquiry-form legend { padding-inline: .35rem; }
+.interest-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .7rem 1.2rem; }
+.interest-grid label { display: flex; align-items: flex-start; gap: .55rem; font-size: .9rem; font-weight: 400; letter-spacing: 0; }
+.interest-grid input { width: 1rem; height: 1rem; margin: .1rem 0 0; accent-color: var(--color-red); }
+.enquiry-form .button { justify-self: start; border: 0; cursor: pointer; }
+.involvement-vision { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center; border-top: 1px solid var(--color-line); }
+.involvement-vision h2 span { color: var(--color-teal); }
+.involvement-vision .involvement-lede { color: var(--color-green); font-size: var(--text-lede); }
+.involvement-vision .involvement-card-title { margin-bottom: var(--space-4); }
+@media(max-width: 620px) {
+  .form-grid,
+  .interest-grid,
+  .involvement-vision { grid-template-columns: 1fr; }
+  .enquiry-form { padding: var(--space-3); }
+  .involvement-vision { gap: var(--space-4); }
+}
+
+/* Final premium form pass: keep the enquiry panel high-contrast after the page defaults. */
+.involvement-conversation {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: start;
+}
+.involvement-conversation .involvement-heading { margin: 0; padding-top: .4rem; }
+.involvement-conversation .involvement-heading h2 { max-width: 28rem; font-size: clamp(2.2rem, 4vw, 3.7rem); }
+.involvement-conversation .involvement-heading > p:last-child { max-width: 32rem; font-size: 1.05rem; line-height: 1.7; }
+.involvement-page .enquiry-form {
+  width: 100%;
+  max-width: none;
+  display: grid;
+  gap: var(--space-4);
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+  border: 1px solid rgba(247,244,236,.18);
+  border-radius: 1.5rem;
+  background: var(--color-green);
+  box-shadow: 0 1.5rem 3.5rem rgba(21,62,53,.15);
+}
+.involvement-page .enquiry-form label,
+.involvement-page .enquiry-form legend { color: var(--color-bone); }
+.involvement-page .enquiry-form label > span { color: rgba(247,244,236,.64); }
+.involvement-page .enquiry-form .form-grid { gap: 1.1rem; padding-bottom: var(--space-4); border-bottom: 1px solid rgba(247,244,236,.2); }
+.involvement-page .enquiry-form input,
+.involvement-page .enquiry-form textarea {
+  border-color: rgba(247,244,236,.28);
+  border-radius: .55rem;
+  background: rgba(247,244,236,.08);
+  color: var(--color-bone);
+}
+.involvement-page .enquiry-form input::placeholder,
+.involvement-page .enquiry-form textarea::placeholder { color: rgba(247,244,236,.56); }
+.involvement-page .enquiry-form input:focus,
+.involvement-page .enquiry-form textarea:focus { border-color: var(--color-bone); outline: 2px solid var(--color-red); outline-offset: 2px; }
+.involvement-page .enquiry-form fieldset { padding: var(--space-4) 0; border-color: rgba(247,244,236,.2); }
+.involvement-page .enquiry-form .interest-grid { gap: .8rem 1rem; }
+.involvement-page .enquiry-form .interest-grid label { color: var(--color-bone); }
+.involvement-page .enquiry-form .interest-grid input { background: var(--color-bone); accent-color: var(--color-red); }
+.involvement-page .enquiry-form .message-field { gap: .7rem; }
+.involvement-page .enquiry-form .button-primary { width: 100%; justify-content: center; margin-top: .2rem; border: 0; background: var(--color-red); color: var(--color-white); }
+.involvement-page .enquiry-form .button-primary:hover { background: var(--color-bone); color: var(--color-green); }
+@media(max-width: 900px) {
+  .involvement-conversation { grid-template-columns: 1fr; gap: var(--space-5); }
+  .involvement-conversation .involvement-heading { max-width: 42rem; }
+}
+@media(max-width: 620px) {
+  .involvement-page .enquiry-form { border-radius: 1.1rem; }
+  .involvement-page .enquiry-form .form-grid { grid-template-columns: 1fr; }
+}
+
+/* Branded multi-select controls: circular so they echo the mark, while retaining checkbox semantics. */
+.involvement-page .enquiry-form .interest-grid input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: 0 0 1.1rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: .08rem 0 0;
+  padding: 0;
+  border: 1.5px solid rgba(247,244,236,.72);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.involvement-page .enquiry-form .interest-grid input[type="checkbox"]:hover {
+  border-color: var(--color-bone);
+  transform: scale(1.06);
+}
+.involvement-page .enquiry-form .interest-grid input[type="checkbox"]:checked {
+  border-color: var(--color-red);
+  background-color: var(--color-red);
+  background-image: radial-gradient(circle, var(--color-white) 0 28%, transparent 31%);
+}
+.involvement-page .enquiry-form .interest-grid input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(214,59,62,.35);
+}
+
+/* Give the option group a quiet inner gutter so its border does not crowd the controls. */
+.involvement-page .enquiry-form fieldset {
+  padding-inline: var(--space-3);
+}
+@media(max-width: 620px) {
+  .involvement-page .enquiry-form fieldset {
+    padding-inline: var(--space-2);
+  }
 }

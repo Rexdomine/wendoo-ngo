@@ -4,11 +4,10 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 
 /* Keep the trust section balanced while bringing governance into the homepage. */
-.accountability{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"eyebrow photo" "heading photo" "lede photo" "commitments photo" "reporting photo" "governance governance";column-gap:clamp(34px,6vw,80px);align-items:start}
+.accountability{display:grid;grid-template-columns:1.05fr .95fr;grid-template-areas:"eyebrow photo" "heading photo" "lede photo" "reporting photo" "governance governance";column-gap:clamp(34px,6vw,80px);align-items:start}
 .accountability>.eyebrow{grid-area:eyebrow}
 .accountability>h2{grid-area:heading}
 .accountability>.section-lede{grid-area:lede}
-.accountability>.commitments{grid-area:commitments;align-self:start}
 .accountability>p:not(.eyebrow):not(.section-lede){grid-area:reporting}
 .accountability-photo{grid-area:photo;margin:8px 0 0;align-self:center}
 .accountability-photo img{display:block;width:100%;max-height:390px;object-fit:cover;border-radius:24px;box-shadow:0 20px 52px #10243b1f}

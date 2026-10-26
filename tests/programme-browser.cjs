@@ -8,11 +8,13 @@ const root = path.resolve(__dirname, '..');
 (async () => {
   const server = http.createServer(async (req, res) => {
     const name = decodeURIComponent(new URL(req.url, 'http://localhost').pathname);
-    const file = path.resolve(root, '.' + (name === '/' ? '/index.html' : name));
+    let rel = name === '/' ? '/index.html' : name;
+    if (!path.extname(rel)) rel += '.html';
+    const file = path.resolve(root, '.' + rel);
     if (!file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
     try {
       const data = await fs.readFile(file);
-      const types = { '.html': 'text/html', '.css': 'text/css', '.jpg': 'image/jpeg', '.png': 'image/png' };
+      const types = { '.html': 'text/html', '.css': 'text/css', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
       res.setHeader('Content-Type', types[path.extname(file)] || 'application/octet-stream');
       res.end(data);
     } catch { res.writeHead(404).end(); }
