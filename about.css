@@ -110,3 +110,11 @@
   .mission-photo { width: min(100%, 25rem); margin: 2.5rem auto .75rem; }
   .mission-photo::before { inset: .75rem -.75rem -.75rem .75rem; }
 }
+
+/* Keep the amendment's two calls to action grouped without changing the page system. */
+.next-step-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); flex-shrink: 0; }
+.next-step .button-light { border: 1px solid var(--color-green); }
+@media (max-width: 40rem) {
+  .next-step-actions { width: 100%; flex-direction: column; }
+  .next-step-actions .button { width: 100%; }
+}

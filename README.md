@@ -8,10 +8,10 @@ The visual direction was generated with Google Stitch and production-hardened lo
 
 ## Run locally
 
-Serve the repository with any static file server, for example:
+Serve the repository with the included preview server so the clean routes used by the navigation work locally:
 
 ```bash
-python3 -m http.server 4173
+python3 preview_server.py 4173 --bind 127.0.0.1
 ```
 
 Then open `http://localhost:4173`.

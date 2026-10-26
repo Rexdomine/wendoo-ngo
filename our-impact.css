@@ -1,36 +1,70 @@
-/* Page-scoped additions; Impact owns its approved blue and white palette. */
-.impact-page{--blue:#2563eb;--blue-dark:#1d4ed8;--sky:#dbeafe;--pale:#f5faff;--ink:#10243b;--muted:#4d6176;--white:#fff;--line:#d6e7f2;--yellow:#ffcf57;--impact-blue:#2563eb;--impact-blue-dark:#1d4ed8;--impact-baby:#dbeafe;--impact-focus:#10243b}
-.impact-page :focus-visible{outline:3px solid #10243b;outline-offset:5px}
-.impact-page .skip-link{z-index:30}
-.impact-page .site-header nav a{color:var(--ink)}
-.impact-page nav [aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
+/* Our Impact: page-scoped layout using Wendoo's shared green and bone palette. */
+.impact-page{--impact-green:var(--site-green,#153e35);--impact-teal:var(--site-teal,#216d62);--impact-bone:var(--site-bone,#f7f4ec);--impact-soft:var(--site-soft,#e8e8dc);--impact-muted:var(--site-muted,#4d625b);--impact-line:var(--site-line,#d5dcd3)}
+.impact-page :focus-visible{outline:3px solid var(--impact-teal);outline-offset:5px}
 .impact-page main{scroll-margin-top:180px}
-.impact-page .impact-hero{max-width:1440px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;padding-top:48px;padding-bottom:72px}
-.impact-page .impact-hero-copy{grid-column:1/7;grid-row:1;z-index:1;background:var(--impact-blue);color:#fff;padding:clamp(28px,3.8vw,54px);margin:64px 0 20px}
-.impact-page .impact-hero .eyebrow{color:var(--impact-baby)}
-.impact-page h1{font-size:clamp(2.8rem,4.8vw,4.6rem);line-height:1.04;letter-spacing:-.05em;margin:0 0 25px}
-.impact-page h1 span{color:var(--impact-baby)}
-.impact-page .impact-hero .section-lede{font-size:1.08rem;color:#fff;line-height:1.65}
-.impact-page .impact-hero .text-link{display:inline-block;color:#fff;margin-top:12px}
-.impact-page .impact-hero :focus-visible{outline-color:#fff}
-.impact-page .impact-hero-visual{grid-column:5/-1;grid-row:1;margin:0;align-self:start}
-.impact-page .impact-hero-photo{display:block;width:100%;height:620px;object-fit:cover;object-position:75% center}
-.impact-page .impact-hero figcaption{font-size:.75rem;line-height:1.5;color:var(--muted);text-align:right;padding:12px 0 0 28%}
-.impact-page .impact-record{background:var(--impact-blue);color:#fff}
-.impact-page .impact-record .eyebrow{color:var(--impact-baby)}
-.impact-page .impact-record h2,.impact-page .impact-story h2,.impact-page .impact-evidence h2{font-size:clamp(2.3rem,4.5vw,4rem);line-height:1.08}
+.impact-page .section-wrap{max-width:1160px}
+.impact-page .impact-hero{max-width:1440px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;padding-top:48px;padding-bottom:84px}
+.impact-page .impact-hero-copy{grid-column:1/7;grid-row:1;z-index:1;margin:64px 0 20px;padding:clamp(28px,3.8vw,54px);background:var(--impact-teal);color:var(--site-white,#fff)}
+.impact-page .impact-hero .eyebrow{color:var(--impact-soft)}
+.impact-page h1{margin:0 0 25px;font-size:clamp(2.8rem,4.8vw,4.6rem);line-height:1.04;letter-spacing:-.05em}
+.impact-page h1 span{color:var(--impact-soft)}
+.impact-page .impact-hero .section-lede{color:var(--site-white,#fff);font-size:1.08rem;line-height:1.65}
+.impact-page .impact-hero .text-link{display:inline-block;margin-top:12px;color:var(--site-white,#fff)}
+.impact-page .impact-hero :focus-visible{outline-color:var(--site-white,#fff)}
+.impact-page .impact-hero-visual{grid-column:5/-1;grid-row:1;align-self:start;margin:0}
+.impact-page .impact-hero-photo{display:block;width:100%;height:620px;object-fit:cover;object-position:center 56%}
+.impact-page .impact-hero figcaption,.impact-page .impact-story-photo figcaption{padding-top:12px;color:var(--impact-muted);font-size:.75rem;line-height:1.5}
+.impact-page .impact-hero figcaption{text-align:right;padding-left:22%}
+.impact-page .impact-record{background:var(--impact-teal);color:var(--site-white,#fff)}
+.impact-page .impact-record .eyebrow{color:var(--impact-soft)}
+.impact-page .impact-record h2,.impact-page .impact-story h2,.impact-page .impact-evidence h2,.impact-page .impact-statistics h2{font-size:clamp(2.3rem,4.5vw,4rem);line-height:1.08}
 .impact-page .impact-record-grid,.impact-page .impact-evidence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:40px}
-.impact-page h3{font-size:1.25rem;line-height:1.3;margin:0 0 14px}
-.impact-page .impact-record-grid article{border-top:1px solid #ffffff70;padding-top:24px}
-.impact-page .impact-record-grid p{color:#fff;margin:0}
+.impact-page h3{margin:0 0 14px;font-size:1.25rem;line-height:1.3}
+.impact-page .impact-record-grid article{padding-top:24px;border-top:1px solid rgb(255 255 255 / .45)}
+.impact-page .impact-record-grid p{margin:0 0 16px;color:var(--site-white,#fff)}
+.impact-page .impact-record-grid p:last-child{margin-bottom:0}
+.impact-page .impact-statistics{padding-top:104px;padding-bottom:104px}
+.impact-page .impact-statistics-heading{max-width:660px}
+.impact-page .impact-statistics h2{margin-bottom:0}
+.impact-page .impact-statistics h2 span{color:var(--impact-teal)}
+.impact-page .impact-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:44px;background:var(--impact-line);border:1px solid var(--impact-line)}
+.impact-page .impact-metrics article{min-height:176px;padding:27px 25px;background:var(--impact-bone)}
+.impact-page .impact-metrics strong,.impact-page .impact-metrics span{display:block}
+.impact-page .impact-metrics strong{color:var(--impact-teal);font-size:clamp(1.65rem,3vw,2.65rem);line-height:1.02;letter-spacing:-.05em}
+.impact-page .impact-metrics span{margin-top:9px;font-size:.82rem;font-weight:800;letter-spacing:.08em;line-height:1.35;text-transform:uppercase}
+.impact-page .impact-metrics p{margin:10px 0 0;color:var(--impact-muted);font-size:.85rem;line-height:1.45}
+.impact-page .impact-statistics-copy{max-width:780px;margin-top:42px}
+.impact-page .impact-statistics-copy .section-lede{margin-bottom:18px}
+.impact-page .impact-statistics-close{margin:0;color:var(--impact-teal);font-size:1.1rem;font-weight:800;line-height:1.5}
 .impact-page .impact-story{display:grid;grid-template-columns:.85fr 1fr;gap:clamp(32px,6vw,75px);align-items:center;scroll-margin-top:180px}
-.impact-page .impact-story img{display:block;width:100%;height:430px;object-fit:cover;border-radius:24px}
-.impact-page .impact-evidence{border-top:1px solid var(--line)}
+.impact-page .impact-story-photo{margin:0}
+.impact-page .impact-story-photo img{display:block;width:100%;height:430px;object-fit:cover;border-radius:24px}
+.impact-page .impact-story-photo figcaption{padding-top:11px}
+.impact-page .impact-evidence{border-top:1px solid var(--impact-line)}
 .impact-page .impact-evidence-heading{max-width:760px}
-.impact-page .impact-evidence-grid article{padding:28px;background:#fff;border:1px solid var(--line);border-radius:20px}
-.impact-page .impact-evidence-grid p{color:var(--muted);margin:0}
-.impact-page .final-cta{background:var(--sky)}
-.impact-page .site-footer{background:#1d4ed8}
+.impact-page .impact-evidence-grid article{padding:28px;border:1px solid var(--impact-line);border-radius:20px;background:var(--site-white,#fff)}
+.impact-page .impact-evidence-grid p{margin:0;color:var(--impact-muted)}
+.impact-page .final-cta{background:var(--impact-soft)}
 .impact-page .final-cta .actions{justify-content:center;margin-top:28px}
-@media(max-width:800px){.impact-page .impact-story{grid-template-columns:1fr}.impact-page .impact-hero{grid-template-columns:1fr;padding-top:24px;padding-bottom:45px}.impact-page .impact-hero-copy{grid-column:1;grid-row:2;margin:-36px 16px 0;padding:32px 24px}.impact-page .impact-hero-visual{grid-column:1;grid-row:1;display:contents}.impact-page .impact-hero-photo{grid-column:1;grid-row:1;height:380px;object-position:75% center}.impact-page .impact-hero figcaption{grid-column:1;grid-row:3;text-align:left;padding:14px 16px 0}.impact-page .impact-record-grid,.impact-page .impact-evidence-grid{grid-template-columns:1fr;gap:24px}.impact-page .impact-story img{height:auto;max-height:480px}}
-@media(max-width:400px){.impact-page h1{font-size:2.6rem}.impact-page .impact-hero-photo{height:300px}.impact-page .text-link{display:inline-block}.impact-page .button{width:100%}}
+@media(max-width:800px){
+  .impact-page .impact-hero{grid-template-columns:1fr;padding-top:24px;padding-bottom:48px}
+  .impact-page .impact-hero-copy{grid-column:1;grid-row:2;margin:-36px 16px 0;padding:32px 24px}
+  .impact-page .impact-hero-visual{grid-column:1;grid-row:1;display:contents}
+  .impact-page .impact-hero-photo{grid-column:1;grid-row:1;height:380px;object-position:center 55%}
+  .impact-page .impact-hero figcaption{grid-column:1;grid-row:3;padding:14px 16px 0;text-align:left}
+  .impact-page .impact-record-grid,.impact-page .impact-evidence-grid{grid-template-columns:1fr;gap:24px}
+  .impact-page .impact-metrics{grid-template-columns:repeat(2,1fr)}
+  .impact-page .metric-school{grid-column:1/-1}
+  .impact-page .impact-metrics article{min-height:152px;padding:23px 20px}
+  .impact-page .impact-story{grid-template-columns:1fr}
+  .impact-page .impact-story-photo img{height:auto;max-height:480px}
+}
+@media(max-width:400px){
+  .impact-page h1{font-size:2.6rem}
+  .impact-page .impact-hero-photo{height:310px}
+  .impact-page .impact-statistics{padding-top:72px;padding-bottom:72px}
+  .impact-page .impact-metrics{gap:1px}
+  .impact-page .impact-metrics article{padding:20px 16px}
+  .impact-page .impact-metrics strong{font-size:1.55rem}
+  .impact-page .button{width:100%}
+}
