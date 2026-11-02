@@ -11,6 +11,17 @@ from urllib.parse import urlsplit, urlunsplit
 class CleanRouteHandler(SimpleHTTPRequestHandler):
     """Serve /about from about.html while keeping normal static-file behavior."""
 
+    def send_head(self):
+        # A reused localhost port can carry a cached page from another project.
+        # Always return this workspace's file rather than a conditional 304.
+        if "If-Modified-Since" in self.headers:
+            del self.headers["If-Modified-Since"]
+        return super().send_head()
+
+    def end_headers(self) -> None:
+        self.send_header("Cache-Control", "no-store")
+        super().end_headers()
+
     def translate_path(self, path: str) -> str:
         parts = urlsplit(path)
         route = parts.path
@@ -28,7 +39,7 @@ class CleanRouteHandler(SimpleHTTPRequestHandler):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Serve Wendoo with clean local routes.")
-    parser.add_argument("port", nargs="?", type=int, default=4173)
+    parser.add_argument("port", nargs="?", type=int, default=4174)
     parser.add_argument("--bind", default="127.0.0.1")
     args = parser.parse_args()
 

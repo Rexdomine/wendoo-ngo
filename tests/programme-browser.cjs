@@ -2,8 +2,17 @@
 const assert = require('node:assert/strict');
 const http = require('node:http');
 const fs = require('node:fs/promises');
+const { existsSync } = require('node:fs');
 const path = require('node:path');
-const { chromium } = require('playwright');
+let chromium;
+const launchOptions = { headless: true };
+try {
+  ({ chromium } = require('playwright'));
+} catch {
+  ({ chromium } = require('playwright-core'));
+  const chrome = process.env.CHROME_EXECUTABLE || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  if (existsSync(chrome)) launchOptions.executablePath = chrome;
+}
 const root = path.resolve(__dirname, '..');
 (async () => {
   const server = http.createServer(async (req, res) => {
@@ -22,7 +31,7 @@ const root = path.resolve(__dirname, '..');
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   let browser;
   try {
-    browser = await chromium.launch({ headless: true });
+    browser = await chromium.launch(launchOptions);
     const base = `http://127.0.0.1:${server.address().port}`;
     const page = await browser.newPage();
     const errors = [];
@@ -33,7 +42,7 @@ const root = path.resolve(__dirname, '..');
       await page.goto(base + '/programme.html');
       await page.locator('img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
       assert.equal(await page.locator('h1').count(), 1);
-      assert.equal(await page.locator('nav [aria-current="page"]').count(), 1);
+      assert.equal(await page.locator('.desktop-nav [aria-current="page"]').count(), 1);
       assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'), 'noindex, nofollow');
       assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `Overflow at ${width}px`);
       assert(await page.locator('img').evaluateAll(images => images.every(img => img.naturalWidth && img.alt.trim())), 'Image load/alt');
@@ -43,6 +52,11 @@ const root = path.resolve(__dirname, '..');
       assert.equal(await page.locator(':focus').getAttribute('id'), 'main');
       await page.locator('a[href="#delivery"]').click();
       await page.waitForFunction(() => location.hash === '#delivery');
+      if (width <= 800) {
+        await page.getByRole('button', { name: 'Open navigation' }).click();
+        assert(await page.getByRole('dialog', { name: 'Site navigation' }).isVisible());
+        await page.keyboard.press('Escape');
+      }
       if (process.env.PROGRAMME_EVIDENCE_DIR && [1440, 390].includes(width)) {
         await page.goto(base + '/programme.html');
         await page.screenshot({ path: path.join(process.env.PROGRAMME_EVIDENCE_DIR, `programme-${width}.png`), fullPage: true });

@@ -1,11 +1,20 @@
 // Local browser rendering with intercepted static files; no deployed preview is implied.
-const { chromium } = require('playwright');
 const fs = require('node:fs/promises');
+const { existsSync } = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+let chromium;
+const launchOptions = { headless: true };
+try {
+  ({ chromium } = require('playwright'));
+} catch {
+  ({ chromium } = require('playwright-core'));
+  const chrome = process.env.CHROME_EXECUTABLE || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+  if (existsSync(chrome)) launchOptions.executablePath = chrome;
+}
 (async () => {
   const root = path.resolve(__dirname, '..');
-  const browser = await chromium.launch({headless: true});
+  const browser = await chromium.launch(launchOptions);
   try {
     const page = await browser.newPage();
     await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -15,7 +24,7 @@ const assert = require('node:assert/strict');
       const u = new URL(route.request().url());
       let file = u.pathname === '/' ? 'index.html' : decodeURIComponent(u.pathname.slice(1));
       if (!path.extname(file)) file += '.html';
-      const types = {'.html':'text/html', '.css':'text/css', '.jpg':'image/jpeg', '.png':'image/png'};
+      const types = {'.html':'text/html', '.css':'text/css', '.js':'text/javascript', '.jpg':'image/jpeg', '.png':'image/png', '.svg':'image/svg+xml'};
       try { await route.fulfill({body:await fs.readFile(path.join(root, file)),contentType:types[path.extname(file)] || 'application/octet-stream'}); }
       catch { errors.push(`Missing asset: ${file}`); await route.fulfill({status:404}); }
     });
@@ -26,7 +35,7 @@ const assert = require('node:assert/strict');
       await page.evaluate(() => Promise.all([...document.images].map(i=>i.decode())));
       assert.equal(await page.locator('h1').count(),1);
       assert.equal(await page.locator('main').count(),1);
-      assert.equal(await page.locator('nav [aria-current="page"]').count(),1);
+      assert.equal(await page.locator('.desktop-nav [aria-current="page"]').count(),1);
       assert.equal(await page.locator('meta[name="robots"]').getAttribute('content'),'noindex, nofollow');
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Overflow at ${width}`);
       assert.ok(await page.evaluate(()=>[...document.images].every(i=>i.naturalWidth>0 && i.alt.length>0)));
@@ -35,8 +44,13 @@ const assert = require('node:assert/strict');
       await page.locator('.skip-link').focus();
       await page.keyboard.press('Enter');
       assert.equal(await page.evaluate(()=>document.activeElement.id),'main');
-      await page.locator('a[href="#programme-experience"]').click();
-      assert.ok(await page.locator('#programme-experience').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('header').getBoundingClientRect().bottom),'Anchor hidden by header');
+      await page.locator('a[href="#pilot-results"]').click();
+      assert.ok(await page.locator('#pilot-results').evaluate(el=>el.getBoundingClientRect().top>=document.querySelector('header').getBoundingClientRect().bottom),'Anchor hidden by header');
+      if (width <= 800) {
+        await page.getByRole('button', { name: 'Open navigation' }).click();
+        assert.ok(await page.getByRole('dialog', { name: 'Site navigation' }).isVisible());
+        await page.keyboard.press('Escape');
+      }
       if (process.env.PAPERCLIP_RUN_SCRATCH_DIR && [390,1440].includes(width)) {
         await page.evaluate(()=>scrollTo(0,0));
         await page.screenshot({path:path.join(process.env.PAPERCLIP_RUN_SCRATCH_DIR,`impact-${width}.png`),fullPage:true});

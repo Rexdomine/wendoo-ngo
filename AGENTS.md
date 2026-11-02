@@ -1,5 +1,12 @@
 # Repository operating instructions
 
+## Project identity and local preview
+
+- This workspace is Wendoo only. Before starting a local server or sharing a preview, confirm the working directory is this repository and the served homepage contains the Wendoo title, logo, and navigation.
+- Use Wendoo's local preview port 4174 by default. Do not reuse an open browser tab or localhost port from another project. If the port is occupied by another project, choose an unused port and report the exact new link.
+- Check the actual rendered desktop browser page, including the visible branding and at least one interior route, before telling Rex the preview is ready. An HTTP 200 response or terminal output is not enough.
+- If the browser shows another project, stop sharing that address, investigate the port and browser cache, and open a clean Wendoo preview. Keep project files and assets inside this workspace unless Rex explicitly requests cross-project work.
+
 ## GitHub operations
 
 - Always use the GitHub Paperclip connector for repository reads and writes. Do not use `git push`, GitHub CLI, or local Git credentials for remote GitHub operations.

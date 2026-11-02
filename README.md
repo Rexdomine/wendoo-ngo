@@ -1,6 +1,6 @@
-# Wendoo NGO Maintenance Page
+# Wendoo Website Preview
 
-A lightweight, responsive maintenance page for **Wendoo School Breakfast Empowerment Initiative**.
+A local preview of the **Wendoo School Breakfast Empowerment Initiative** website.
 
 ## Design source
 
@@ -11,10 +11,10 @@ The visual direction was generated with Google Stitch and production-hardened lo
 Serve the repository with the included preview server so the clean routes used by the navigation work locally:
 
 ```bash
-python3 preview_server.py 4173 --bind 127.0.0.1
+python3 preview_server.py --bind 127.0.0.1
 ```
 
-Then open `http://localhost:4173`.
+Then open `http://127.0.0.1:4174/`. This port is reserved for the Wendoo preview in this workspace. Before sharing it, check the rendered page in the desktop browser for the Wendoo title, logo, and navigation; an HTTP success code alone is insufficient.
 
 ## Validation
 

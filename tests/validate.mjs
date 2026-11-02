@@ -7,24 +7,23 @@ const vercel = JSON.parse(await readFile(new URL('../vercel.json', import.meta.u
 
 const requiredCopy = [
   'Wendoo School Breakfast Empowerment Initiative',
-  'Every child deserves a better start.',
   'No child should have to learn on an empty stomach.',
-  'Wendoo is a Nigerian social-impact organisation working with schools, communities and partners to help children start the school day nourished, ready to learn and able to participate.',
+  'Every child deserves a',
+  'better start.',
+  'A small meal.',
+  'A bigger day.',
+  'Nkeze Primary School',
+  '244 pupils',
+  'Enrolled at our pilot school',
   'Donate',
-  'A child’s school day should not begin with hunger.',
-  'From local need to',
-  'lasting impact.',
-  'Honest about where we are.',
-  'Ambitious about where we’re going.',
-  'The people behind Wendoo.',
-  'Your company can help build',
-  'what comes next.',
-  'We are building something bigger.',
-  'What if breakfast was just the beginning?',
-  'Partner With Wendoo',
+  'Partner with Wendoo',
 ];
 for (const text of requiredCopy) {
   assert.ok(html.includes(text), `Missing required copy: ${text}`);
+}
+
+for (const text of ['Illustrative image', 'Homepage photography is AI-generated for illustration.', '>01<', '>02<', '>03<']) {
+  assert.ok(!html.includes(text), `Unwanted homepage label: ${text}`);
 }
 
 const forbiddenCopy = [
@@ -39,7 +38,7 @@ for (const text of forbiddenCopy) {
 
 assert.match(html, /<html lang="en">/);
 assert.match(html, /<main id="main">/);
-assert.match(html, /<h1>/);
+assert.match(html, /<h1\b/);
 assert.match(html, /alt="Wendoo School Breakfast Empowerment Initiative"/);
 assert.match(html, /name="robots" content="noindex, nofollow"/);
 assert.match(css, /@media\(max-width:900px\)/);
