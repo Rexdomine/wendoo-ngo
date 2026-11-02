@@ -13,7 +13,7 @@
   toggle.className = 'mobile-menu-toggle';
   toggle.setAttribute('aria-label', 'Open navigation');
   toggle.setAttribute('aria-expanded', 'false');
-  toggle.innerHTML = '<span aria-hidden="true">☰</span>';
+  toggle.innerHTML = '<span class="menu-bars" aria-hidden="true"></span>';
 
   overlay.className = 'mobile-menu-overlay';
   overlay.id = 'mobile-navigation';
@@ -25,7 +25,7 @@
   close.type = 'button';
   close.className = 'mobile-menu-close';
   close.setAttribute('aria-label', 'Close navigation');
-  close.innerHTML = '<span aria-hidden="true">×</span>';
+  close.innerHTML = '<span class="menu-close-mark" aria-hidden="true"></span>';
 
   toggle.setAttribute('aria-controls', overlay.id);
   overlay.append(close, navigation);

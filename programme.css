@@ -46,7 +46,7 @@ main:focus { outline: none; }
 .origin-inner { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(50px, 7vw, 105px); align-items: center; padding-top: 130px; padding-bottom: 130px; }
 .origin-heading h2 { max-width: 520px; margin-bottom: 0; }
 .origin-detail { position: relative; display: grid; grid-template-columns: .86fr 1.14fr; align-items: center; gap: 26px; min-height: 400px; padding: 45px 42px; background: var(--red); color: white; border-radius: 5px 36px 5px 36px; }
-.origin-detail::after { content: '✳'; position: absolute; right: -36px; bottom: -60px; color: var(--green); font-size: 12rem; line-height: 1; transform: rotate(-10deg); }
+.origin-detail::after { content: ''; position: absolute; right: -36px; bottom: -60px; width: 12rem; height: 12rem; background: var(--green); -webkit-mask: url('/assets/icon-spark.svg') center / contain no-repeat; mask: url('/assets/icon-spark.svg') center / contain no-repeat; transform: rotate(-10deg); }
 .origin-place { position: relative; z-index: 1; font-size: clamp(2.6rem, 4vw, 4.7rem); font-weight: 900; letter-spacing: -.07em; line-height: .96; }
 .origin-text { position: relative; z-index: 1; }
 .origin-text p { margin-bottom: 19px; font-size: 1.02rem; line-height: 1.55; }

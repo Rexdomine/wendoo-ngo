@@ -178,6 +178,10 @@ summary:focus-visible { outline-color: var(--site-teal); }
 /* Small-screen navigation: a purpose-built, page-level overlay. */
 .mobile-menu { display: none; }
 .mobile-menu-toggle { display: none; }
+.menu-bars { display: block; width: 20px; height: 2px; border-radius: 2px; background: currentColor; box-shadow: 0 -6px currentColor, 0 6px currentColor; }
+.menu-close-mark { position: relative; display: block; width: 20px; height: 20px; }
+.menu-close-mark::before, .menu-close-mark::after { content: ''; position: absolute; top: 9px; left: 0; width: 20px; height: 2px; border-radius: 2px; background: currentColor; transform: rotate(45deg); }
+.menu-close-mark::after { transform: rotate(-45deg); }
 
 @media (max-width: 620px) {
   .site-header {

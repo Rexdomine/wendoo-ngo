@@ -18,6 +18,17 @@ body { margin: 0; background: var(--cream); color: var(--ink); font-family: Aria
 img { max-width: 100%; }
 a { color: inherit; }
 button { font: inherit; }
+/* Draw decorative symbols from SVG masks so mobile browsers never substitute emoji. */
+.site-symbol::before { content: ''; display: inline-block; width: .85em; height: .85em; vertical-align: -.04em; background: currentColor; -webkit-mask-image: var(--site-symbol); mask-image: var(--site-symbol); -webkit-mask-position: center; mask-position: center; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: contain; mask-size: contain; }
+.site-symbol--spark { --site-symbol: url('/assets/icon-spark.svg'); }
+.site-symbol--burst { --site-symbol: url('/assets/icon-burst.svg'); }
+.site-symbol--arrow { --site-symbol: url('/assets/icon-arrow-up-right.svg'); }
+.site-symbol--half { --site-symbol: url('/assets/icon-half.svg'); }
+.site-symbol--target { --site-symbol: url('/assets/icon-target.svg'); }
+.site-symbol--star { --site-symbol: url('/assets/icon-star.svg'); }
+.site-symbol--wave-arrow { --site-symbol: url('/assets/icon-wave-arrow.svg'); }
+.site-symbol--at { --site-symbol: url('/assets/icon-at.svg'); }
+.site-symbol--wave { --site-symbol: url('/assets/icon-wave.svg'); }
 ::selection { background: var(--red); color: white; }
 :focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 .skip-link { position: fixed; top: -4rem; left: 1rem; z-index: 2000; padding: .8rem 1rem; background: white; color: var(--green); }
@@ -29,7 +40,7 @@ h1, h2, h3 { letter-spacing: -.055em; }
 h1, h2 { font-weight: 900; line-height: .99; }
 h2 { font-size: clamp(3.3rem, 6.2vw, 6rem); }
 em { color: var(--red); font-family: Georgia, 'Times New Roman', serif; font-weight: 500; letter-spacing: -.07em; }
-.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 54px; padding: 14px 22px; border: 0; border-radius: 2px 13px 2px 13px; text-decoration: none; font-size: .88rem; font-weight: 800; line-height: 1.2; transition: transform .2s ease, background .2s ease; }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 54px; padding: 14px 22px; border: 0; border-radius: 2px 13px 2px 13px; text-align: center; text-decoration: none; font-size: .88rem; font-weight: 800; line-height: 1.2; transition: transform .2s ease, background .2s ease; }
 .button:hover { transform: translateY(-3px); }
 .button span { font-size: 1.15em; }
 .button-red { background: var(--red); color: white; }
@@ -154,6 +165,10 @@ em { color: var(--red); font-family: Georgia, 'Times New Roman', serif; font-wei
 .mobile-menu-overlay.is-open { opacity: 1; }
 .mobile-menu-open { overflow: hidden; }
 .mobile-menu-close { justify-self: end; display: grid; place-items: center; width: 47px; height: 47px; margin: 19px 22px 0 0; border: 0; border-radius: 2px 12px 2px 12px; background: var(--green); color: white; font-size: 2rem; cursor: pointer; }
+.menu-bars { display: block; width: 20px; height: 2px; border-radius: 2px; background: currentColor; box-shadow: 0 -6px currentColor, 0 6px currentColor; }
+.menu-close-mark { position: relative; display: block; width: 20px; height: 20px; }
+.menu-close-mark::before, .menu-close-mark::after { content: ''; position: absolute; top: 9px; left: 0; width: 20px; height: 2px; border-radius: 2px; background: currentColor; transform: rotate(45deg); }
+.menu-close-mark::after { transform: rotate(-45deg); }
 .mobile-menu-overlay nav { display: flex; flex-direction: column; align-self: center; width: min(100% - 52px, 430px); margin: 0 auto; padding: 12px 0 50px; }
 .mobile-menu-overlay nav a { display: block; padding: 13px 2px; border-bottom: 1px solid #cbd3c6; text-decoration: none; font-size: clamp(1.35rem, 5vw, 2rem); font-weight: 800; letter-spacing: -.035em; }
 .mobile-menu-overlay nav a.nav-donate { width: fit-content; margin-top: 20px; padding: 13px 23px; border: 0; background: var(--red); color: white; }
