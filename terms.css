@@ -34,6 +34,8 @@
 .terms-page .eyebrow { color: var(--legal-teal); }
 .terms-page .site-footer { background: var(--legal-green); }
 .terms-page .site-footer p, .terms-page .site-footer small { color: var(--white); }
+.terms-page .footer-social-link img { filter: brightness(0) invert(1); }
+.terms-page .footer-social-link:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
 .terms-page a:focus-visible { outline: var(--legal-focus) solid var(--legal-teal); outline-offset: var(--legal-focus); }
 .terms-page .site-footer a:focus-visible { outline-color: var(--white); }
 .terms-page .skip-link:focus { position: fixed; z-index: 30; }
