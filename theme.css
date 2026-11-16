@@ -349,3 +349,8 @@ html { background: var(--site-bone); }
 .involvement-next :focus-visible,
 .mission :focus-visible,
 .site-footer a:focus-visible { outline-color: var(--site-bone); }
+
+.site-footer .footer-social-link img { filter: brightness(0) invert(1); }
+.site-footer .footer-social-link { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; }
+.site-footer .footer-social-link:hover { background: rgba(255, 255, 255, .14); }
+.site-footer .footer-social-link:focus-visible { outline: 3px solid var(--site-bone); outline-offset: 3px; }
