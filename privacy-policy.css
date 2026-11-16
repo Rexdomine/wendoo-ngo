@@ -36,6 +36,8 @@
 .legal-copy p { margin: 0 0 var(--legal-space-2); }
 .legal-return { gap: var(--legal-space-1); font-weight: 700; }
 .legal-page a:focus-visible { outline: var(--legal-focus-width) solid currentColor; outline-offset: var(--legal-focus-width); }
+.legal-page .footer-social-link img { filter: brightness(0) invert(1); }
+.legal-page .footer-social-link:focus-visible { outline: var(--legal-focus-width) solid currentColor; outline-offset: var(--legal-focus-width); }
 .legal-page .skip-link:focus { z-index: 30; }
 @media (max-width: 900px) {
   .legal-layout { grid-template-columns: 1fr; gap: var(--legal-space-4); }
