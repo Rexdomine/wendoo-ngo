@@ -158,9 +158,10 @@ em { color: var(--red); font-family: Georgia, 'Times New Roman', serif; font-wei
 .site-footer nav a { color: #344b41; text-decoration: none; font-size: .88rem; }
 .site-footer nav a:hover { color: var(--red); text-decoration: underline; }
 .footer-bottom { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 20px; margin-top: 50px; padding-top: 18px; border-top: 1px solid #acbdad; color: #5a7064; font-size: .7rem; line-height: 1.5; }
-.footer-social-link { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; width: 44px; height: 44px; margin-top: -12px; border-radius: 50%; transition: background-color .2s ease, transform .2s ease; }
-.footer-social-link img { display: block; width: 23px; height: 23px; }
-.footer-social-link:hover { background: #d5e2d2; transform: translateY(-2px); }
+.footer-social { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+.footer-social-link { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border: 1px solid #8fa697; border-radius: 50%; background: rgba(255, 255, 255, .35); transition: background-color .2s ease, border-color .2s ease, transform .2s ease; }
+.footer-social-link img { display: block; width: 22px; height: 22px; }
+.footer-social-link:hover { background: #d5e2d2; border-color: var(--green); transform: translateY(-2px); }
 .footer-social-link:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
 
 /* The existing mobile-menu.js moves the navigation into this accessible overlay. */
@@ -267,6 +268,7 @@ em { color: var(--red); font-family: Georgia, 'Times New Roman', serif; font-wei
   .footer-about img { width: 190px; }
   .footer-bottom { display: block; margin-top: 5px; }
   .footer-bottom span { display: block; margin-bottom: 8px; }
+  .footer-social { margin-top: 18px; }
 }
 
 @media (max-width: 380px) {
