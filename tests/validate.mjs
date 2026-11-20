@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-const css = await readFile(new URL('../styles.css', import.meta.url), 'utf8');
+const css = await readFile(new URL('../homepage.css', import.meta.url), 'utf8');
 const vercel = JSON.parse(await readFile(new URL('../vercel.json', import.meta.url), 'utf8'));
 
 const requiredCopy = [
@@ -16,7 +16,7 @@ const requiredCopy = [
   '244 pupils',
   'Enrolled at our pilot school',
   'Donate',
-  'Partner with Wendoo',
+  'Partner with us',
 ];
 for (const text of requiredCopy) {
   assert.ok(html.includes(text), `Missing required copy: ${text}`);
@@ -41,7 +41,7 @@ assert.match(html, /<main id="main">/);
 assert.match(html, /<h1\b/);
 assert.match(html, /alt="Wendoo School Breakfast Empowerment Initiative"/);
 assert.match(html, /name="robots" content="noindex, nofollow"/);
-assert.match(css, /@media\(max-width:900px\)/);
+assert.match(css, /@media \(max-width: 800px\)/);
 assert.match(css, /prefers-reduced-motion/);
 assert.ok(vercel.headers.some((entry) => entry.source === '/(.*)'), 'Security headers missing');
 

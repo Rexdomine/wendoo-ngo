@@ -2,6 +2,8 @@
 
 Contact page implementation; usable enquiry path is still intentionally unavailable.
 
+> **Current state (2026-11-20):** this handoff is a historical record. `contact.html` now lists Wendoo's Nigeria and UK phone numbers, `donate@wendoongo.com` and the Asaba office address (7B Blossom Mall, DBS Road). It loads `homepage.css` + `contact.css` and two scripts (`mobile-menu.js`, `contact-topic.js`). The message form is still disabled with a "being set up" notice, and `vercel.json` still sets `form-action 'none'`, so no enquiry can be submitted yet.
+
 ## Files and integration
 
 - `contact.html`: semantic, noindex Contact page with truthful unavailable state.
